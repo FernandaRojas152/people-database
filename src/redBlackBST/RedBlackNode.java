@@ -10,14 +10,10 @@ public class RedBlackNode<K extends Comparable<K>, V> {
 	protected RedBlackNode<K, V> p;
 	protected RedBlackNode<K, V> left;
 	protected RedBlackNode<K, V> right;
-	protected int numLeft = 0;
-	protected int numRight = 0;
 	protected int color;
 
     public RedBlackNode() {
         color = BLACK;
-        numLeft = 0;
-        numRight = 0;
         p = null;
         left = null;
         right = null;
