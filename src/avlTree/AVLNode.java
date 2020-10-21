@@ -1,14 +1,16 @@
 package avlTree;
 
-public class AVLNode<K extends Comparable<K>, T> {
+import binarySearchTree.Node;
+
+public class AVLNode<K extends Comparable<K>, T> extends Node<K,T> {
 	private int balanceFactor;
 	
-	public AVLNode() {
-		
+	public AVLNode(K key, T value) {
+		super(key, value);
+		balanceFactor= 0;
 	}
 
 	public int getBalanceFactor() {
-		
 		return balanceFactor;
 	}
 
