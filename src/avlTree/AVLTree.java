@@ -51,4 +51,13 @@ public class AVLTree<K extends Comparable<K>, T> extends BinarySearchTree<K,T> {
 	public void search() {
 		
 	}
+	
+	public static void main(String[] args) {
+		AVLTree<String, String> tree = new AVLTree<String, String>();
+		tree.add("c", "4");
+		tree.add("b", "6");
+		tree.add("a", "2");
+		tree.add("d", "1");
+		System.out.println(tree.getWeight());
+	}
 }

@@ -21,7 +21,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
 	
 	public BinarySearchTree() {
 	}
-	
+		
 	/**
 	 * Adds a new node to the binary search tree
 	 * <b>post:</b> A new node has been added<br>
@@ -31,13 +31,32 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
 	 */
 	
 	public void addNode(K k, V v) throws Exception {
-		
 		Node<K, V> node = new Node<>(k, v);
+		addNode(root, node);
+	}
+	
+	private void addNode(Node<K, V> current, Node<K, V> node) throws Exception {
 		
 		if(root==null)
 			root = node;
-		else
-			root.addNode(node);
+		else {
+			if(current.getK().compareTo(node.getK())==0)
+				throw new Exception("Element already inserted in the tree");
+			
+			if(current.getK().compareTo(node.getK())>0) {
+				
+				if(current.getLeft()==null) 
+					current.setLeft(node);
+				else
+					addNode(current.getLeft(), node);
+			}else {
+				
+				if(current.getLeft()==null) 
+					current.setRight(node);
+				else
+					addNode(current.getRight(), node);
+			}
+		}
 	}
 	
 	/**
