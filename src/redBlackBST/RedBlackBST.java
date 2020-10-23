@@ -18,7 +18,6 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
     }
 
 	private void leftRotate(RedBlackNode<K, V> x){
-		leftRotateFixup(x);
 		RedBlackNode<K, V> y;
 		y = x.right;
 		x.right = y.left;
@@ -31,31 +30,7 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 		x.p = y;
 	}
 
-	private void leftRotateFixup(RedBlackNode<K, V> x){
-		if (isNil(x.left) && isNil(x.right.left)){
-			x.numLeft = 0;
-			x.numRight = 0;
-			x.right.numLeft = 1;
-		}else if (isNil(x.left) && !isNil(x.right.left)){
-			x.numLeft = 0;
-			x.numRight = 1 + x.right.left.numLeft +
-					x.right.left.numRight;
-			x.right.numLeft = 2 + x.right.left.numLeft +
-					  x.right.left.numRight;
-		}else if (!isNil(x.left) && isNil(x.right.left)){
-			x.numRight = 0;
-			x.right.numLeft = 2 + x.left.numLeft + x.left.numRight;
-
-		}else {
-			x.numRight = 1 + x.right.left.numLeft +
-				     x.right.left.numRight;
-			x.right.numLeft = 3 + x.left.numLeft + x.left.numRight +
-			x.right.left.numLeft + x.right.left.numRight;
-		}
-	}
-
 	private void rightRotate(RedBlackNode<K, V> y){
-		rightRotateFixup(y);
         RedBlackNode<K, V> x = y.left;
         y.left = x.right;
         if (!isNil(x.right)) x.right.p = y;
@@ -65,31 +40,6 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
         else y.p.left = x;
         x.right = y;
         y.p = x;
-	}
-
-	private void rightRotateFixup(RedBlackNode<K, V> y){
-
-		if (isNil(y.right) && isNil(y.left.right)){
-			y.numRight = 0;
-			y.numLeft = 0;
-			y.left.numRight = 1;
-		}else if (isNil(y.right) && !isNil(y.left.right)){
-			y.numRight = 0;
-			y.numLeft = 1 + y.left.right.numRight +
-				  y.left.right.numLeft;
-			y.left.numRight = 2 + y.left.right.numRight +
-				  y.left.right.numLeft;
-		}else if (!isNil(y.right) && isNil(y.left.right)){
-			y.numLeft = 0;
-			y.left.numRight = 2 + y.right.numRight +y.right.numLeft;
-
-		}else {
-			y.numLeft = 1 + y.left.right.numRight +
-				  y.left.right.numLeft;
-			y.left.numRight = 3 + y.right.numRight +
-				  y.right.numLeft +
-			y.left.right.numRight + y.left.right.numLeft;
-		}
 	}
 
     public void insertRB(K k, V v) {
@@ -102,10 +52,8 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 		while (!isNil(x)){
 			y = x;	
 			if (z.k.compareTo(x.k) < 0){
-				x.numLeft++;
 				x = x.left;
 			}else {
-				x.numRight++;
 				x = x.right;
 				}
 			}
@@ -187,39 +135,7 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 		else if (!isNil(y.p.left) && y.p.left == y) y.p.left = x;
 		else if (!isNil(y.p.right) && y.p.right == y) y.p.right = x;
 		if (y != z) z.k = y.k;
-		fixNodeData(x,y);
 		if (y.color == RedBlackNode.BLACK) removeFixup(x);
-	}
-
-	private void fixNodeData(RedBlackNode<K, V> x, RedBlackNode<K, V> y){
-		RedBlackNode<K, V> current = nil;
-		RedBlackNode<K, V> track = nil;
-		if (isNil(x)){
-			current = y.p;
-			track = y;
-		}else {
-			current = x.p;
-			track = x;
-		}
-		while (!isNil(current)){
-			if (y.k != current.k) {
-				if (y.k.compareTo(current.k) > 0)
-					current.numRight--;
-				if (y.k.compareTo(current.k) < 0)
-					current.numLeft--;
-			}else {
-				if (isNil(current.left))
-					current.numLeft--;
-				else if (isNil(current.right))
-					current.numRight--;
-				else if (track == current.right)
-					current.numRight--;
-				else if (track == current.left)
-					current.numLeft--;
-			}
-			track = current;
-			current = current.p;
-		}
 	}
 
 	private void removeFixup(RedBlackNode<K, V> x){
@@ -299,7 +215,13 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 	}
 
 	public int size() {
-		return root.numLeft + root.numRight + 1;
+		return size(root);
+	}
+	
+	private int size(RedBlackNode<K, V> root) {
+		int lw = root.left==nil ? 0 : size(root.left);
+		int rw = root.right==nil ? 0 : size(root.right);
+		return 1+lw+rw;
 	}
 
 	public void inOrder(Collection<V> collection) {
@@ -326,14 +248,14 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 		tree.insertRB("f", "6");
 		tree.insertRB("d", "4");
 		tree.insertRB("a", "1");
-//		System.out.println(tree.size());
-//		tree.deleteRB("c");
-//		System.out.println(tree.size());
-//		System.out.println(tree.search("b").getV());
+		System.out.println(tree.size());
+		tree.deleteRB("c");
+		System.out.println(tree.size());
+		System.out.println(tree.search("b").getV());
 		List<String> list = new ArrayList<>();
-		tree.inOrder(list);
-		for (String string : list) {
-			System.out.println(string);
-		}
+//		tree.inOrder(list);
+//		for (String string : list) {
+//			System.out.println(string);
+//		}
 	}
 }
