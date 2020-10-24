@@ -134,7 +134,6 @@ public class AVLTree<K extends Comparable<K>, T> extends BinarySearchTree<K,T> {
 				}
 			}
 		}
-		
 	}
 	*/
 	public static void main(String[] args) {
