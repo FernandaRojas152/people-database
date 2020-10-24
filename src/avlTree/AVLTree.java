@@ -1,12 +1,10 @@
 package avlTree;
-
 import binarySearchTree.BinarySearchTree;
 
 public class AVLTree<K extends Comparable<K>, T> extends BinarySearchTree<K,T> {
 	public AVLTree() {
 	}
 	
-
 	public boolean add(K key, T value) {
 		AVLNode<K,T> child= new AVLNode<>(key, value);
 		boolean added= addNode(child);
@@ -46,7 +44,45 @@ public class AVLTree<K extends Comparable<K>, T> extends BinarySearchTree<K,T> {
 		}
 		return added;
 	}
+
+	public void delete(K key, T value) {
+		AVLNode<K,T> child= new AVLNode<>(key, value);
+		deleteNode(key);
+			AVLNode<K,T> parent= (AVLNode<K, T>) child.getParent();
+			while(parent!=null) {
+				if(child== parent.getLeft()) {
+					if(parent.getBalanceFactor()== 1) {
+						if(child.getBalanceFactor()== -1) {
+							rotateLeft(child);
+						}
+						rotateRight(parent);
+						break;
+					}
+					if(parent.getBalanceFactor()== -1) {
+						parent.setBalanceFactor(0);
+						break;
+					}
+					parent.setBalanceFactor(1);
+				}else {
+					if(parent.getBalanceFactor()==-1) {
+						if(child.getBalanceFactor()== 1) {
+							rotateRight(child);
+						}
+						rotateLeft(parent);
+						break;
+					}
+					if(parent.getBalanceFactor()== 1) {
+						parent.setBalanceFactor(0);
+						break;
+					}
+					parent.setBalanceFactor(-1);
+				}
+				child= parent;
+				parent= (AVLNode<K, T>) child.getParent();
+			}
+	}
 	
+	/**
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void delete(AVLNode<K,T> child) {
 		AVLNode<K,T> aux= null;
@@ -100,7 +136,7 @@ public class AVLTree<K extends Comparable<K>, T> extends BinarySearchTree<K,T> {
 		}
 		
 	}
-	
+	*/
 	public static void main(String[] args) {
 		AVLTree<Integer, Integer> prueba= new AVLTree<>();
 		prueba.add(3, 5);
@@ -109,13 +145,7 @@ public class AVLTree<K extends Comparable<K>, T> extends BinarySearchTree<K,T> {
 		System.out.println(prueba.getRoot().getV());
 		prueba.add(1, 10);
 		System.out.println(prueba.getRoot().getV());
-//		prueba.add(4, 16);
-//		prueba.add(5, 18);
-//		prueba.add(6, 20);
-		
-//		prueba.addNode(3, 5);
-//		prueba.addNode(2, 15);
-//		prueba.addNode(1, 10);
-//		prueba.rotateRight(3);	
+		prueba.delete(2,15);
+		System.out.println(prueba.getRoot().getV());
 	}
 }

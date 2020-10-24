@@ -14,22 +14,6 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 	private Node<K, V> root;
 	private int weight;
 	private int height;
-	
-	public Node<K, V> getRoot() {
-		return root;
-	}
-
-	public void setRoot(Node<K, V> root) {
-		this.root = root;
-	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
 
 	/**
 	 * BinarySearchTree constructor
@@ -44,24 +28,16 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 		return addNode(tA);
 	}
 	
-	
-	/**
-	 * Adds a node in the tree, provided that it's key hasn't been added yet.
-	 * @param ta The given node to be added in the tree.
-	 */
 	protected boolean addNode(Node<K, V> tA) {
 		if(searchNode(tA.getK()) != null) {
 			return false;
-		}		
-		
+		}
 		if(root == null) {
 			root = tA;
 			return true;
 		}
-		
 		Node<K, V> current = root;
 		boolean added = false;
-		
 		while(!added){
 			if(tA.getK().compareTo(current.getK())<0) {
 				if(current.getLeft() != null) {
@@ -82,7 +58,6 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 			}
 		}
 		return added;
-		
 	}
 	
 	/**
@@ -169,6 +144,14 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 			height = root.getHeight();
 		
 		return height;
+	}
+	
+	public Node<K, V> getRoot() {
+		return root;
+	}
+
+	public void setRoot(Node<K, V> root) {
+		this.root = root;
 	}
 	
 	public void rotateLeft(K key) {
