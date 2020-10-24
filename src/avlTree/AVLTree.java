@@ -50,7 +50,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
 		setRoot(delete((AVLNode<K, V>) getRoot(), k));
 	}
 	
-public AVLNode<K, V> delete(AVLNode<K, V> current, K k) {	
+	private AVLNode<K, V> delete(AVLNode<K, V> current, K k) {	
 		
         if (current == null) return current;  
 	        if (k.compareTo(current.getK()) < 0)
