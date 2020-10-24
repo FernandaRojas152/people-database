@@ -2,20 +2,21 @@ package avlTree;
 
 import binarySearchTree.Node;
 
-public class AVLNode<K extends Comparable<K>, T> extends Node<K,T> {
-	private int balanceFactor;
+public class AVLNode<K extends Comparable<K>, V> extends Node<K,V> {
 	
-	public AVLNode(K key, T value) {
+	private int height;
+	
+	public AVLNode(K key, V value) {
 		super(key, value);
-		balanceFactor= 0;
+		height = 1;
+	}
+	
+	@Override
+	public int getHeight() {
+		return height;
 	}
 
-	public int getBalanceFactor() {
-		return balanceFactor;
+	public void setHeight(int height) {
+		this.height = height;
 	}
-
-	public void setBalanceFactor(int balanceFactor) {
-		this.balanceFactor = balanceFactor;
-	}
-
 }

@@ -11,11 +11,11 @@ import java.util.Collection;
  */
 
 public class Node<K extends Comparable<K>, V> {
+	
 	private K k;
 	private V v;
 	private Node<K, V> left;
 	private Node<K, V> right;
-	private Node<K, V> parent;
 	
 	/**
 	 * Node constructor
@@ -28,20 +28,30 @@ public class Node<K extends Comparable<K>, V> {
 		this.v = v;
 	}
 	
-	public Node<K, V> getLeft() {
-		return left;
-	}
+	/**
+	 * Adds a new node to the node's subtree
+	 * @param Kode
+	 * @throws Exception
+	 */
 
-	public void setLeft(Node<K, V> left) {
-		this.left = left;
-	}
-
-	public Node<K, V> getRight() {
-		return right;
-	}
-
-	public void setRight(Node<K, V> right) {
-		this.right = right;
+	public void addNode(Node<K, V> node) throws Exception {
+		
+		if(k.compareTo(node.k)==0)
+			throw new Exception();
+		
+		if(k.compareTo(node.k)>0) {
+			
+			if(left==null) 
+				left = node;
+			else
+				left.addNode(node);
+		}else {
+			
+			if(right==null) 
+				right = node;
+			else
+				right.addNode(node);
+		}
 	}
 	
 	/**
@@ -201,7 +211,7 @@ public class Node<K extends Comparable<K>, V> {
 	public boolean isLeaf() {
 		return left==null && right==null;
 	}
-
+	
 	public K getK() {
 		return k;
 	}
@@ -218,12 +228,20 @@ public class Node<K extends Comparable<K>, V> {
 		this.v = v;
 	}
 
-	public Node<K, V> getParent() {
-		return parent;
+	public Node<K, V> getLeft() {
+		return left;
 	}
 
-	public void setParent(Node<K, V> parent) {
-		this.parent = parent;
+	public void setLeft(Node<K, V> left) {
+		this.left = left;
+	}
+
+	public Node<K, V> getRight() {
+		return right;
+	}
+
+	public void setRight(Node<K, V> right) {
+		this.right = right;
 	}
 }
 

@@ -9,80 +9,35 @@ import java.util.Collection;
  * @param <V> Value
  */
 
-public class BinarySearchTree<K extends Comparable<K>, V>{
+public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearchTreeOperations<K, V>{
 	
-	private Node<K, V> root;
+	private Node<K, V> current;
 	private int weight;
 	private int height;
 	
-	public Node<K, V> getRoot() {
-		return root;
-	}
-
-	public void setRoot(Node<K, V> root) {
-		this.root = root;
-	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
 	/**
 	 * BinarySearchTree constructor
 	 */
 	
 	public BinarySearchTree() {
-		root= null;
 	}
-	
-	public boolean add(K k, V v) {
-		Node<K, V> tA = new Node<>(k,v);
-		return addNode(tA);
-	}
-	
 	
 	/**
-	 * Adds a node in the tree, provided that it's key hasn't been added yet.
-	 * @param ta The given node to be added in the tree.
+	 * Adds a new node to the binary search tree
+	 * <b>post:</b> A new node has been added<br>
+	 * @param k Key
+	 * @param v Value
+	 * @throws Exception
 	 */
-	protected boolean addNode(Node<K, V> tA) {
-		if(searchNode(tA.getK()) != null) {
-			return false;
-		}		
+	
+	public void addNode(K k, V v) throws Exception {
 		
-		if(root == null) {
-			root = tA;
-			return true;
-		}
+		Node<K, V> node = new Node<>(k, v);
 		
-		Node<K, V> current = root;
-		boolean added = false;
-		
-		while(!added){
-			if(tA.getK().compareTo(current.getK())<0) {
-				if(current.getLeft() != null) {
-					current = current.getLeft();
-				}else {
-					current.setLeft(tA);
-					tA.setParent(current);
-					added = true;
-				}
-			}else {
-				if(current.getRight() != null){
-					current = current.getRight();
-				}else {
-					current.setRight(tA);
-					tA.setParent(current);
-					added = true;
-				}
-			}
-		}
-		return added;
-		
+		if(current==null)
+			current = node;
+		else
+			current.addNode(node);
 	}
 	
 	/**
@@ -102,7 +57,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 	 */
 	
 	public Node<K, V> searchNode(K k) {
-		return root==null ? null : root.searchNode(k);
+		return current==null ? null : current.searchNode(k);
 	}
 	
 	/**
@@ -111,7 +66,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 	 */
 	
 	public void deleteNode(K k) {
-		root.deleteNode(k);
+		current.deleteNode(k);
 	}
 	
 	/**
@@ -120,7 +75,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 	 */
 	
 	public void inOrder(Collection<V> collection) {
-		root.inOrder(collection);
+		current.inOrder(collection);
 	}
 	
 	/**
@@ -129,7 +84,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 	 */
 	
 	public void preOrder(Collection<V> collection) {
-		root.preOrder(collection);
+		current.preOrder(collection);
 	}
 	
 	/**
@@ -138,7 +93,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 	 */
 	
 	public void postOrder(Collection<V> collection) {
-		root.postOrder(collection);
+		current.postOrder(collection);
 	}
 	
 	/**
@@ -148,10 +103,10 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 	
 	public int getWeight() {
 		
-		if(root==null)
+		if(current==null)
 			return 0;
 		else
-			weight = root.getWeight();
+			weight = current.getWeight();
 		
 		return weight;
 	}
@@ -163,57 +118,19 @@ public class BinarySearchTree<K extends Comparable<K>, V>{
 	
 	public int getHeight() {
 		
-		if(root==null)
+		if(current==null)
 			return 0;
 		else
-			height = root.getHeight();
+			height = current.getHeight();
 		
 		return height;
 	}
-	
-	public void rotateLeft(K key) {
-		Node<K, V> node= searchNode(key);
-		rotateLeft(node);
+
+	public Node<K, V> getRoot() {
+		return current;
 	}
-	
-	protected void rotateLeft(Node<K, V> node) {
-		Node<K, V> aux= node.getRight();
-		node.setRight(aux.getLeft());
-		if(aux.getLeft()!=null) {
-			aux.getLeft().setParent(node);
-		}
-		aux.setParent(node.getParent());
-		if(node.getParent()== null) {
-			root= aux;
-		}else if(node== node.getParent().getLeft()) {
-			node.getParent().setLeft(aux);
-		}else {
-			node.getParent().setRight(aux);
-		}
-		aux.setLeft(node);
-		node.setParent(aux);
-	}
-	
-	public void rotateRight(K key) {
-		Node<K, V> node= searchNode(key);
-		rotateRight(node);
-	}
-	
-	protected void rotateRight(Node<K, V> node) {
-		Node<K, V> aux= node.getLeft();
-		node.setLeft(aux.getRight());
-		if(aux.getRight()!=null) {
-			aux.getRight().setParent(node);
-		}
-		aux.setParent(node.getParent());
-		if(node.getParent()== null) {
-			root= aux;
-		}else if(node== node.getParent().getRight()) {
-			node.getParent().setRight(aux);
-		}else {
-			node.getParent().setLeft(aux);
-		}
-		aux.setRight(node);
-		node.setParent(aux);
+
+	public void setRoot(Node<K, V> root) {
+		this.current = root;
 	}
 }
