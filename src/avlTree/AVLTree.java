@@ -1,4 +1,5 @@
 package avlTree;
+
 import binarySearchTree.BinarySearchTree;
 import binarySearchTree.Node;
 
@@ -153,14 +154,5 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
 		prueba.deleteNode(10);
 		System.out.println(prueba.getRoot().getK());
 		System.out.println(prueba.getWeight());
-	
-//		prueba.add(4, 16);
-//		prueba.add(5, 18);
-//		prueba.add(6, 20);
-		
-//		prueba.addNode(3, 5);
-//		prueba.addNode(2, 15);
-//		prueba.addNode(1, 10);
-//		prueba.rotateRight(3);	
 	}
 }
