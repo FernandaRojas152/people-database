@@ -59,7 +59,6 @@ public class Node<K extends Comparable<K>, V> {
 	 * @param k Key
 	 * @return Node
 	 */
-	
 	public Node<K, V> searchNode(K k){
 		
 		if(this.k.compareTo(k)==0) 
@@ -80,8 +79,7 @@ public class Node<K extends Comparable<K>, V> {
 	 * @return Updated subtree
 	 */
 	
-	public Node<K, V> deleteNode(K k) {
-		
+	public Node<K, V> deleteNode(K k) {		
 		if(isLeaf()) 
 			return null;
 		

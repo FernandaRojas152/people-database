@@ -14,7 +14,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
 	private Node<K, V> current;
 	private int weight;
 	private int height;
-	
+
 	/**
 	 * BinarySearchTree constructor
 	 */

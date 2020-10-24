@@ -1,5 +1,4 @@
 package avlTree;
-
 import binarySearchTree.BinarySearchTree;
 import binarySearchTree.Node;
 
@@ -51,7 +50,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
 		setRoot(delete((AVLNode<K, V>) getRoot(), k));
 	}
 	
-	public AVLNode<K, V> delete(AVLNode<K, V> current, K k) {	
+public AVLNode<K, V> delete(AVLNode<K, V> current, K k) {	
 		
         if (current == null) return current;  
 	        if (k.compareTo(current.getK()) < 0)
@@ -108,7 +107,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
 			 current = (AVLNode<K, V>) current.getLeft();
 		 return current;  
 	}
-
+	
 	private Node<K, V> rightRotate(AVLNode<K, V> y) {  
 		AVLNode<K, V> x = (AVLNode<K, V>) y.getLeft();  
 		AVLNode<K, V> T2 = (AVLNode<K, V>) x.getRight();  
