@@ -1,8 +1,6 @@
 package redBlackBST;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOperations<K, V>{
 	
@@ -238,24 +236,5 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 
 	private boolean isNil(RedBlackNode<K, V> node){
 		return node == nil;
-	}
-	
-	public static void main(String[] args) {
-		RedBlackBST<String, String> tree = new RedBlackBST<>();
-		tree.insertRB("c", "3");
-		tree.insertRB("e", "5");
-		tree.insertRB("b", "2");
-		tree.insertRB("f", "6");
-		tree.insertRB("d", "4");
-		tree.insertRB("a", "1");
-		System.out.println(tree.size());
-		tree.deleteRB("c");
-		System.out.println(tree.size());
-		System.out.println(tree.search("b").getV());
-		List<String> list = new ArrayList<>();
-//		tree.inOrder(list);
-//		for (String string : list) {
-//			System.out.println(string);
-//		}
 	}
 }
