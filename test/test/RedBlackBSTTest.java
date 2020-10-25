@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import redBlackBST.RedBlackBST;
 
-class RedBlackTest {
+class RedBlackBSTTest {
 	
 	RedBlackBST<Integer, String> redBlackBST;
 
