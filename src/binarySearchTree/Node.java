@@ -34,10 +34,10 @@ public class Node<K extends Comparable<K>, V> {
 	 * @throws Exception
 	 */
 
-	public void addNode(Node<K, V> node) throws Exception {
+	public void addNode(Node<K, V> node) throws IllegalArgumentException {
 		
 		if(k.compareTo(node.k)==0)
-			throw new Exception();
+			throw new IllegalArgumentException("Element already exists.");
 		
 		if(k.compareTo(node.k)>0) {
 			

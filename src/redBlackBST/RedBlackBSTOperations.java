@@ -8,6 +8,6 @@ public interface RedBlackBSTOperations <K extends Comparable<K>, V> {
 	 public void deleteRB(K k);
 	 public RedBlackNode<K, V> search(K k);
 	 public void updateNode(K k, V v) ;
-	 public int size();	
+	 public int getSize();	
 	 public void inOrder(Collection<V> collection);	
 }

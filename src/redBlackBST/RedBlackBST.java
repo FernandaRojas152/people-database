@@ -44,25 +44,26 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
         insertRB(new RedBlackNode<K, V>(k, v));
     }
 
-	private void insertRB(RedBlackNode<K, V> z) {
+	private void insertRB(RedBlackNode<K, V> z) throws IllegalArgumentException {
 		RedBlackNode<K, V> y = nil;
 		RedBlackNode<K, V> x = root;
 		while (!isNil(x)){
 			y = x;	
-			if (z.k.compareTo(x.k) < 0){
+			if(z.k.compareTo(x.k)==0)
+				throw new IllegalArgumentException("Element already exists.");
+			if (z.k.compareTo(x.k) < 0)
 				x = x.left;
-			}else {
+			else 
 				x = x.right;
-				}
-			}
-			z.p = y;
-			if (isNil(y)) root = z;
-			else if (z.k.compareTo(y.k) < 0) y.left = z;
-			else y.right = z;
-			z.left = nil;
-			z.right = nil;
-			z.color = RedBlackNode.RED;
-			insertFixup(z);
+		}
+		z.p = y;
+		if (isNil(y)) root = z;
+		else if (z.k.compareTo(y.k) < 0) y.left = z;
+		else y.right = z;
+		z.left = nil;
+		z.right = nil;
+		z.color = RedBlackNode.RED;
+		insertFixup(z);	
 	}
 	
 	private void insertFixup(RedBlackNode<K, V> z){
@@ -193,6 +194,10 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 		}
 		x.color = RedBlackNode.BLACK;
 	}
+	
+	private boolean isNil(RedBlackNode<K, V> node){
+		return node == nil;
+	}
 
 	public RedBlackNode<K, V> search(K k){
 		RedBlackNode<K, V> current = root;
@@ -212,13 +217,13 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 		node.setV(v);
 	}
 
-	public int size() {
-		return size(root);
+	public int getSize() {
+		return getSize(root);
 	}
 	
-	private int size(RedBlackNode<K, V> root) {
-		int lw = root.left==nil ? 0 : size(root.left);
-		int rw = root.right==nil ? 0 : size(root.right);
+	private int getSize(RedBlackNode<K, V> root) {
+		int lw = root.left==nil ? 0 : getSize(root.left);
+		int rw = root.right==nil ? 0 : getSize(root.right);
 		return 1+lw+rw;
 	}
 
@@ -232,9 +237,5 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 		collection.add(root.v);
 		if(root.right!=nil)
 			inOrder(root.right, collection);
-	}
-
-	private boolean isNil(RedBlackNode<K, V> node){
-		return node == nil;
 	}
 }

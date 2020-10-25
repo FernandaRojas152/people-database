@@ -17,7 +17,6 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
 		
         if (current == null)  
             return node;  
-  
         if (node.getK().compareTo(current.getK()) < 0)  
             current.setLeft(add((AVLNode<K, V>) current.getLeft(), node));  
         else if (node.getK().compareTo(current.getK()) > 0)  
