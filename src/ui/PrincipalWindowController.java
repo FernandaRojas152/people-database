@@ -45,6 +45,12 @@ public class PrincipalWindowController {
 
     @FXML
     private VBox suggestions;
+
+    @FXML
+    private TextField delete;
+
+    @FXML
+    private TextField modify;
     
     public PrincipalWindowController() {
 	}
@@ -71,9 +77,26 @@ public class PrincipalWindowController {
 			suggestions.getChildren().add(l);
 		}
 	}
-    
+
+    @FXML
+    void createPerson(ActionEvent event) {
+
+    }
+
+    @FXML
+    void deletePerson(ActionEvent event) {
+
+    }
+
     @FXML
     void generateData(ActionEvent event) {
 
     }
+
+    @FXML
+    void modifyPerson(ActionEvent event) {
+
+    }
+    
+    
 }
