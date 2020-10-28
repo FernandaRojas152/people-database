@@ -8,4 +8,13 @@ public class PrincipalWindowController {
     @FXML
     private TextField amountData;
 
+    public PrincipalWindowController() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    @FXML
+    public void initialize() {
+		// TODO Auto-generated method stub
+
+	}
 }
