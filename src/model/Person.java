@@ -11,10 +11,9 @@ public class Person {
 	private LocalDate birthDate;
 	private Double height;
 	private String nationality;
-	private String photo;
 	
 	public Person(String code, String name, String lastName, String sex, LocalDate birthDate, Double height,
-			String nationality, String photo) {
+			String nationality) {
 		super();
 		this.code = code;
 		this.name = name;
@@ -23,7 +22,6 @@ public class Person {
 		this.birthDate = birthDate;
 		this.height = height;
 		this.nationality = nationality;
-		this.photo = photo;
 	}
 
 	public String getCode() {
@@ -80,13 +78,5 @@ public class Person {
 
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 }
