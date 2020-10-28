@@ -4,7 +4,6 @@ import binarySearchTree.BinarySearchTree;
 import binarySearchTree.Node;
 
 public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
-	
 	public AVLTree() {
 	}
 	
@@ -136,23 +135,5 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
 	private int getBalance(AVLNode<K, V> node) {  
         if (node == null) return 0;  
         return height((AVLNode<K, V>) node.getLeft()) - height((AVLNode<K, V>) node.getRight());  
-    }  
-	
-	public static void main(String[] args) {
-		AVLTree<Integer, Integer> prueba= new AVLTree<>();
-		prueba.addNode(9, 10);
-		prueba.addNode(5, 10);
-		prueba.addNode(10, 10);
-		prueba.addNode(0, 10);
-		prueba.addNode(6, 10);
-		prueba.addNode(11, 10);
-		prueba.addNode(-1, 5);
-		prueba.addNode(1, 10);
-		prueba.addNode(2, 10);
-		System.out.println(prueba.getRoot().getK());
-		prueba.deleteNode(10);
-		System.out.println(prueba.getRoot().getK());
-		System.out.println(prueba.getWeight());
-		System.out.println(prueba.searchNode(2).getK());
-	}
+    }
 }

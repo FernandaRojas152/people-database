@@ -20,5 +20,19 @@ public class Database implements Serializable {
 		redBlackBST2 = new RedBlackBST<String, Person>();
 	}
 	
-	
+	public AVLTree<String, Person> getaVLTree1() {
+		return aVLTree1;
+	}
+
+	public AVLTree<String, Person> getaVLTree2() {
+		return aVLTree2;
+	}
+
+	public RedBlackBST<String, Person> getRedBlackBST1() {
+		return redBlackBST1;
+	}
+
+	public RedBlackBST<String, Person> getRedBlackBST2() {
+		return redBlackBST2;
+	}
 }

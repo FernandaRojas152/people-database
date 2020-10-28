@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TrieNode {
-	public static final int ALPHABET_SIZE= 26;
-	TrieNode[] word= new TrieNode[ALPHABET_SIZE];
 	boolean end;
 	private char data;
 	LinkedList<TrieNode> children;
@@ -19,13 +17,10 @@ public class TrieNode {
 	}
 
 	public TrieNode getChild(char c) {
-		if(children!=null) {
-			for (TrieNode trieNode : children) {
-				if(trieNode.data== c) {
+		if(children!=null)
+			for (TrieNode trieNode : children)
+				if(trieNode.data== c)
 					return trieNode;
-				}
-			}
-		}
 		return null;
 	}
 	public List<String> getWords(){
@@ -47,7 +42,7 @@ public class TrieNode {
 		if(parent==null) {
 			return "";
 		}else {
-			return parent.toString() + new String(new char [data]);
+			return parent.toString() + new String(new char[] {data});
 		}
 	}
 }
