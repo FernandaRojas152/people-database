@@ -24,7 +24,7 @@ public class Database implements Serializable {
 	
 	public AVLTree<String, Person> getName() {
 		return name;
-
+	}
 
 	public AVLTree<String, Person> getLastName() {
 		return lastName;
