@@ -26,19 +26,12 @@ public class Main extends Application{
 			primaryStage.setTitle("database");
 			primaryStage.setResizable(false);
 			primaryStage.show();
-			/**primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 				@Override
 				public void handle(WindowEvent arg0) {
-					// TODO Auto-generated method stub
-					try {
-						principal.saveData();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				}
-			});*/
+			});
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

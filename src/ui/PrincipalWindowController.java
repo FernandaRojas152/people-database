@@ -1,21 +1,23 @@
 package ui;
 
-import java.util.List;
-
-import javafx.event.ActionEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.Database;
+import java.util.List;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import trie.Trie;
 
 public class PrincipalWindowController {
-	private Trie trie;
-	@FXML
-    private TextField amountData;
-
+    
     @FXML
     private TextField name;
 
@@ -52,12 +54,14 @@ public class PrincipalWindowController {
     @FXML
     private TextField modify;
     
-    public PrincipalWindowController() {
-	}
+	private Trie trie;
+    private Database database;
     
     @FXML
     public void initialize() {
-		trie= new Trie();
+    	database = new Database();
+    	loadData();
+    	trie= new Trie();
 		trie.insert("Edgar Allan Poe");
 		trie.insert("James Barrie");
 		trie.insert("Emily Bronte");
@@ -77,8 +81,35 @@ public class PrincipalWindowController {
 			Label l= new Label(data.get(i));
 			suggestions.getChildren().add(l);
 		}
-	}
+    }
 
+    public void loadData() {
+    	try {
+    		FileInputStream fileIn = new FileInputStream("resources\\database.txt");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			database = (Database) in.readObject();
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+	public void saveData() {
+		try {
+			FileOutputStream fileOut = new FileOutputStream("resources\\database.txt", false);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(database);
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
     @FXML
     void createPerson(ActionEvent event) {
 
@@ -103,4 +134,5 @@ public class PrincipalWindowController {
     void saveData(ActionEvent event) {
 
     }
+
 }

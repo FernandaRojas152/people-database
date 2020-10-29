@@ -13,15 +13,18 @@ public class Database implements Serializable {
 	private AVLTree<String, Person> name;
 	private AVLTree<String, Person> lastName;
 	private RedBlackBST<String, Person> fullName;
-	private RedBlackBST<String, Person> code;
+	private RedBlackBST<String, Person> id;
 	
 	public Database() {
-		// TODO Auto-generated constructor stub
+		name = new AVLTree<String, Person>();
+		lastName = new AVLTree<String, Person>();
+		fullName = new RedBlackBST<String, Person>();
+		id = new RedBlackBST<String, Person>();
 	}
 	
 	public AVLTree<String, Person> getName() {
 		return name;
-	}
+
 
 	public AVLTree<String, Person> getLastName() {
 		return lastName;
@@ -31,8 +34,8 @@ public class Database implements Serializable {
 		return fullName;
 	}
 
-	public RedBlackBST<String, Person> getCode() {
-		return code;
+	public RedBlackBST<String, Person> getId() {
+		return id;
 	}
 	
 	public void createPerson(String name, String lastName, String sex, LocalDate birthDate, Double height,
