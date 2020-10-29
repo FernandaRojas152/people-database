@@ -32,6 +32,7 @@
                         </Text>
                         <Button layoutX="252.0" layoutY="218.0" mnemonicParsing="false" onAction="#generateData" text="Generate" />
                         <Label layoutX="141.0" layoutY="111.0" text="Please input the amount of data you want to generate" />
+                        <Button disable="true" layoutX="455.0" layoutY="309.0" mnemonicParsing="false" onAction="#saveData" text="Save data" />
                      </children></AnchorPane>
               </content>
             </Tab>

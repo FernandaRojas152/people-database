@@ -73,6 +73,7 @@ public class PrincipalWindowController {
 		List<String> data= trie.autocomplete(name);
 		suggestions= new VBox();
 		for (int i = 0; i < data.size(); i++) {
+			System.out.println(data.get(i));
 			Label l= new Label(data.get(i));
 			suggestions.getChildren().add(l);
 		}
@@ -98,5 +99,8 @@ public class PrincipalWindowController {
 
     }
     
-    
+    @FXML
+    void saveData(ActionEvent event) {
+
+    }
 }
