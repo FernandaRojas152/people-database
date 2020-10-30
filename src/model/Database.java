@@ -2,44 +2,51 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import avlTree.AVLTree;
 import redBlackBST.RedBlackBST;
 
 public class Database implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	private AVLTree<String, Person> name;
-	private AVLTree<String, Person> lastName;
-	private RedBlackBST<String, Person> fullName;
-	private RedBlackBST<String, Person> id;
-	
+
+	private static AVLTree<String, Person> nameP;
+	private static AVLTree<String, Person> lastNameP;
+	private static RedBlackBST<String, Person> fullNameP;
+	private static RedBlackBST<String, Person> id;
+
 	public Database() {
-		name = new AVLTree<String, Person>();
-		lastName = new AVLTree<String, Person>();
-		fullName = new RedBlackBST<String, Person>();
+		nameP = new AVLTree<String, Person>();
+		lastNameP = new AVLTree<String, Person>();
+		fullNameP = new RedBlackBST<String, Person>();
 		id = new RedBlackBST<String, Person>();
 	}
-	
+
 	public AVLTree<String, Person> getName() {
-		return name;
+		return nameP;
 	}
 
 	public AVLTree<String, Person> getLastName() {
-		return lastName;
+		return lastNameP;
 	}
 
 	public RedBlackBST<String, Person> getFullName() {
-		return fullName;
+		return fullNameP;
 	}
 
 	public RedBlackBST<String, Person> getId() {
 		return id;
 	}
-	
-	public void createPerson(String name, String lastName, String sex, LocalDate birthDate, Double height,
+
+	public static void createPerson(String name, String lastName, String sex, LocalDate birthDate, Double height,
 			String nationality, String photo) {
-		
+		String uniqueID = UUID.randomUUID().toString();
+		String fullName= name+" "+lastName;
+		Person person= new Person(uniqueID, name, lastName, sex, birthDate, height, nationality);
+		nameP.addNode(name, person);
+		lastNameP.addNode(lastName, person);
+		fullNameP.insertRB(fullName, person);
+		id.insertRB(uniqueID, person);
 	}
 }

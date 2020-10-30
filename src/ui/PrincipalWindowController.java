@@ -9,16 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.Database;
 import java.util.List;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import trie.Trie;
@@ -56,9 +52,9 @@ public class PrincipalWindowController {
 
 	@FXML
 	private TextField modify;
-	
+
 	@FXML
-    private ScrollPane scroll;
+	private ScrollPane scroll;
 
 	private Trie trie;
 	private Database database;
@@ -79,7 +75,9 @@ public class PrincipalWindowController {
 		trie.insert("JRR Tolkien");
 		trie.insert("Elvira Sastre");
 		trie.insert("Alejandra Pizarnik");
-		
+
+		//code based on
+		//https://stackoverflow.com/questions/31370478/how-get-an-event-when-text-in-a-textfield-changes-javafx
 		auto.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -92,7 +90,6 @@ public class PrincipalWindowController {
 					List<String> data= trie.autocomplete(name);
 					suggestions.getChildren().clear();
 					for (int i = 0; i < data.size(); i++) {
-						System.out.println(data.get(i));
 						Label l= new Label(data.get(i));
 						suggestions.getChildren().add(l);
 						scroll.setContent(suggestions);
