@@ -4,6 +4,7 @@ import binarySearchTree.BinarySearchTree;
 import binarySearchTree.Node;
 
 public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
+	private AVLNode<K, V> node;
 	public AVLTree() {
 	}
 	
@@ -136,4 +137,12 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
         if (node == null) return 0;  
         return height((AVLNode<K, V>) node.getLeft()) - height((AVLNode<K, V>) node.getRight());  
     }
+
+	public AVLNode<K, V> getNode() {
+		return node;
+	}
+
+	public void setNode(AVLNode<K, V> node) {
+		this.node = node;
+	}
 }

@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+
 import avlTree.AVLTree;
 import redBlackBST.RedBlackBST;
 
@@ -8,31 +10,35 @@ public class Database implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private AVLTree<String, Person> aVLTree1;
-	private AVLTree<String, Person> aVLTree2;
-	private RedBlackBST<String, Person> redBlackBST1;
-	private RedBlackBST<String, Person> redBlackBST2;
+	private AVLTree<String, Person> name;
+	private AVLTree<String, Person> lastName;
+	private RedBlackBST<String, Person> fullName;
+	private RedBlackBST<String, Person> id;
 	
 	public Database() {
-		aVLTree1 = new AVLTree<String, Person>();
-		aVLTree2 = new AVLTree<String, Person>();
-		redBlackBST1 = new RedBlackBST<String, Person>();
-		redBlackBST2 = new RedBlackBST<String, Person>();
+		name = new AVLTree<String, Person>();
+		lastName = new AVLTree<String, Person>();
+		fullName = new RedBlackBST<String, Person>();
+		id = new RedBlackBST<String, Person>();
 	}
 	
-	public AVLTree<String, Person> getaVLTree1() {
-		return aVLTree1;
+	public AVLTree<String, Person> getName() {
+		return name;
 	}
 
-	public AVLTree<String, Person> getaVLTree2() {
-		return aVLTree2;
+	public AVLTree<String, Person> getLastName() {
+		return lastName;
 	}
 
-	public RedBlackBST<String, Person> getRedBlackBST1() {
-		return redBlackBST1;
+	public RedBlackBST<String, Person> getFullName() {
+		return fullName;
 	}
 
-	public RedBlackBST<String, Person> getRedBlackBST2() {
-		return redBlackBST2;
+	public RedBlackBST<String, Person> getId() {
+		return id;
+	}
+	
+	public void createPerson(String name, String lastName, String sex, LocalDate birthDate, Double height,
+			String nationality, String photo) {
 	}
 }

@@ -19,7 +19,7 @@ public class TrieNode {
 	public TrieNode getChild(char c) {
 		if(children!=null)
 			for (TrieNode trieNode : children)
-				if(trieNode.data== c)
+				if(Character.toLowerCase(trieNode.data)==Character.toLowerCase(c))
 					return trieNode;
 		return null;
 	}
