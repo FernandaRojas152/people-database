@@ -63,7 +63,7 @@ public class PrincipalWindowController {
 	@FXML
 	public void initialize() {
 		database = new Database();
-		//loadData();
+//		loadData();
 		trie= new Trie();
 		trie.insert("Edgar Allan Poe");
 		trie.insert("James Barrie");
@@ -114,19 +114,7 @@ public class PrincipalWindowController {
 			e.printStackTrace();
 		}
 	}
-
-	public void saveData() {
-		try {
-			FileOutputStream fileOut = new FileOutputStream("data\\database.txt", false);
-			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			out.writeObject(database);
-			out.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
+	
 	@FXML
 	void createPerson(ActionEvent event) {
 
@@ -148,7 +136,15 @@ public class PrincipalWindowController {
 	}
 
 	@FXML
-	void saveData(ActionEvent event) {
-		saveData();
+	public void saveData() {
+		try {
+			FileOutputStream fileOut = new FileOutputStream("data\\database.txt", false);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(database);
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

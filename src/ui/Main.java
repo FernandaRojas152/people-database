@@ -29,6 +29,7 @@ public class Main extends Application{
 
 				@Override
 				public void handle(WindowEvent arg0) {
+					principal.saveData();
 				}
 			});
 		} catch(Exception e) {
