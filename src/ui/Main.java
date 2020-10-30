@@ -30,13 +30,7 @@ public class Main extends Application{
 
 				@Override
 				public void handle(WindowEvent arg0) {
-					// TODO Auto-generated method stub
-					try {
-						principal.saveData();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					principal.saveData();
 				}
 			});
 		} catch(Exception e) {
