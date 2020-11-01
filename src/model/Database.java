@@ -28,7 +28,7 @@ public class Database implements Serializable {
 	}
 
 	public void createPerson(String name, String lastName, String sex, LocalDate birthDate, Double height, 
-			String nationality) {
+			String nationality) throws IllegalArgumentException {
 		String code = UUID.randomUUID().toString();
 		Person person = new Person(code, name, lastName, sex, birthDate, height, nationality);
 		nameAVLTree.addNode(name, person);

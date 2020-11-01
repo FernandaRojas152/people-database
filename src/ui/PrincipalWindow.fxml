@@ -50,7 +50,7 @@
                         <DatePicker fx:id="birthdate" layoutX="140.0" layoutY="150.0" prefHeight="25.0" prefWidth="149.0" />
                         <TextField fx:id="height" layoutX="140.0" layoutY="190.0" />
                         <TextField fx:id="nationality" layoutX="140.0" layoutY="230.0" />
-                        <ImageView fx:id="photo" fitHeight="140.0" fitWidth="140.0" layoutX="371.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="photo" fitHeight="170.0" fitWidth="170.0" layoutX="360.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
                         <Button layoutX="540.0" layoutY="330.0" mnemonicParsing="false" onAction="#createPerson" text="Create" />
                         <ChoiceBox fx:id="genders" layoutX="140.0" layoutY="110.0" prefWidth="150.0" />
                      </children></AnchorPane>
@@ -91,7 +91,7 @@
                         <Label layoutX="240.0" layoutY="230.0" text="Height" />
                         <Label layoutX="240.0" layoutY="270.0" text="Nationality" />
                         <TextField fx:id="modify1111111" layoutX="360.0" layoutY="270.0" />
-                        <ImageView fitHeight="140.0" fitWidth="140.0" layoutX="43.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
                         <ChoiceBox layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
                      </children></AnchorPane>
               </content>

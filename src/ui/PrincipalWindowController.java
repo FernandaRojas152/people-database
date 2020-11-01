@@ -1,14 +1,18 @@
 package ui;
 
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -18,6 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -84,6 +89,14 @@ public class PrincipalWindowController {
 		database = new Database();
 		loadData();
 		updateEmergenceList();
+		try {
+			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			photo.setImage(image);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		searchOptions.setItems(FXCollections.observableArrayList(NAME, LAST_NAME, FULL_NAME, CODE));
 		genders.setItems(FXCollections.observableArrayList(MALE, FEMALE));
 	}
@@ -101,27 +114,32 @@ public class PrincipalWindowController {
 //		trie.insert("Elvira Sastre");
 //		trie.insert("Alejandra Pizarnik");
 		
-		if(searchOptions.getValue()==NAME) {
-			trie = new Trie();
-			for (Person person : database.getPersonsByName()) {
-				trie.insert(person.getName());
+		searchOptions.accessibleTextProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+				if(searchOptions.getValue()==NAME) {
+					trie = new Trie();
+					for (Person person : database.getPersonsByName()) {
+						trie.insert(person.getName());
+					}
+				}else if(searchOptions.getValue()==LAST_NAME) {
+					trie = new Trie();
+					for (Person person : database.getPersonsByLastName()) {
+						trie.insert(person.getLastName());
+					}
+				}else if(searchOptions.getValue()==FULL_NAME) {
+					trie = new Trie();
+					for (Person person : database.getPersonsByFullName()) {
+						trie.insert(person.getName()+" "+person.getLastName());
+					}
+				}else if(searchOptions.getValue()==CODE) {
+					trie = new Trie();
+					for (Person person : database.getPersonsByCode()) {
+						trie.insert(person.getCode());
+					}
+				}
 			}
-		}else if(searchOptions.getValue()==LAST_NAME) {
-			trie = new Trie();
-			for (Person person : database.getPersonsByLastName()) {
-				trie.insert(person.getLastName());
-			}
-		}else if(searchOptions.getValue()==FULL_NAME) {
-			trie = new Trie();
-			for (Person person : database.getPersonsByFullName()) {
-				trie.insert(person.getName()+" "+person.getLastName());
-			}
-		}else if(searchOptions.getValue()==CODE) {
-			trie = new Trie();
-			for (Person person : database.getPersonsByCode()) {
-				trie.insert(person.getCode());
-			}
-		}
+		});
 		
 		auto.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -156,16 +174,27 @@ public class PrincipalWindowController {
 			birthdate.setValue(null);
 			height.setText(null);
 			nationality.setText(null);
+			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			photo.setImage(image);
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Invalid Entry");
+			alert.setContentText("Entries cannot be null.");
+			alert.show();
 		} catch (NumberFormatException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setHeaderText("Invalid Entry");
 			alert.setContentText("Height must be a number.");
 			alert.show();
-		} catch (NullPointerException e) {
+		} catch (IllegalArgumentException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setHeaderText("Invalid Entry");
-			alert.setContentText("Entries cannot be empty.");
+			alert.setContentText(e.getMessage());
 			alert.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
