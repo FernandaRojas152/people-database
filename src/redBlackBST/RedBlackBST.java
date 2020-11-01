@@ -2,7 +2,7 @@ package redBlackBST;
 
 import java.util.Collection;
 
-public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOperations<K, V>{
+public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOperations<K, V> {
 	
 	private RedBlackNode<K, V> nil;
 	private RedBlackNode<K, V> root;

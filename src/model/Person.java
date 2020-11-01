@@ -14,7 +14,6 @@ public class Person {
 	
 	public Person(String code, String name, String lastName, String gender, LocalDate birthDate, Double height,
 			String nationality) {
-		super();
 		this.code = code;
 		this.name = name;
 		this.lastName = lastName;

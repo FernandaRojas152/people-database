@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import avlTree.AVLTree;
 import redBlackBST.RedBlackBST;
 
@@ -25,9 +27,9 @@ public class Database implements Serializable {
 		persons = new ArrayList<Person>();
 	}
 
-	public void createPerson(String code, String name, String lastName, String sex, LocalDate birthDate, Double height, 
+	public void createPerson(String name, String lastName, String sex, LocalDate birthDate, Double height, 
 			String nationality) {
-		
+		String code = UUID.randomUUID().toString();
 		Person person = new Person(code, name, lastName, sex, birthDate, height, nationality);
 		nameAVLTree.addNode(name, person);
 		lastNameAVLTree.addNode(lastName, person);
