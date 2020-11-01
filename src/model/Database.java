@@ -2,7 +2,8 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.List;
 import avlTree.AVLTree;
 import redBlackBST.RedBlackBST;
 
@@ -10,35 +11,69 @@ public class Database implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private AVLTree<String, Person> name;
-	private AVLTree<String, Person> lastName;
-	private RedBlackBST<String, Person> fullName;
-	private RedBlackBST<String, Person> id;
+	private AVLTree<String, Person> nameAVLTree;
+	private AVLTree<String, Person> lastNameAVLTree;
+	private RedBlackBST<String, Person> fullNameRBTree;
+	private RedBlackBST<String, Person> codeRBTree;
+	private List<Person> persons;
 	
 	public Database() {
-		name = new AVLTree<String, Person>();
-		lastName = new AVLTree<String, Person>();
-		fullName = new RedBlackBST<String, Person>();
-		id = new RedBlackBST<String, Person>();
+		nameAVLTree = new AVLTree<String, Person>();
+		lastNameAVLTree = new AVLTree<String, Person>();
+		fullNameRBTree = new RedBlackBST<String, Person>();
+		codeRBTree = new RedBlackBST<String, Person>();
+		persons = new ArrayList<Person>();
+	}
+
+	public void createPerson(String code, String name, String lastName, String sex, LocalDate birthDate, Double height, 
+			String nationality) {
+		
+		Person person = new Person(code, name, lastName, sex, birthDate, height, nationality);
+		nameAVLTree.addNode(name, person);
+		lastNameAVLTree.addNode(lastName, person);
+		fullNameRBTree.insertRB(name+" "+lastName, person);
+		codeRBTree.insertRB(code, person);
 	}
 	
-	public AVLTree<String, Person> getName() {
-		return name;
-	}
-
-	public AVLTree<String, Person> getLastName() {
-		return lastName;
-	}
-
-	public RedBlackBST<String, Person> getFullName() {
-		return fullName;
-	}
-
-	public RedBlackBST<String, Person> getId() {
-		return id;
+	public void deletePerson(String name, String lastName, String code) {
+		nameAVLTree.deleteNode(name);
+		lastNameAVLTree.deleteNode(lastName);
+		fullNameRBTree.deleteRB(name+" "+lastName);
+		codeRBTree.deleteRB(code);
 	}
 	
-	public void createPerson(String name, String lastName, String sex, LocalDate birthDate, Double height,
-			String nationality, String photo) {
+	public void updatePerson(String code, String name, String lastName, String gender, LocalDate birthDate, Double height, 
+			String nationality) {
+		Person person = codeRBTree.search(code).getV();
+		person.setName(name);
+		person.setLastName(lastName);
+		person.setGender(gender);
+		person.setBirthDate(birthDate);
+		person.setHeight(height);
+		person.setNationality(nationality);
+	}
+	
+	public List<Person> getPersonsByName() {
+		persons.clear();
+		nameAVLTree.inOrder(persons);
+		return persons;
+	}
+	
+	public List<Person> getPersonsByLastName() {
+		persons.clear();
+		lastNameAVLTree.inOrder(persons);
+		return persons;
+	}
+	
+	public List<Person> getPersonsByFullName() {
+		persons.clear();
+		fullNameRBTree.inOrder(persons);
+		return persons;
+	}
+	
+	public List<Person> getPersonsByCode() {
+		persons.clear();
+		codeRBTree.inOrder(persons);
+		return persons;
 	}
 }
