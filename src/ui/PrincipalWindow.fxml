@@ -80,7 +80,7 @@
                         <ChoiceBox fx:id="searchOptions" layoutX="309.0" layoutY="42.0" prefWidth="150.0" />
                         <ImageView fitHeight="338.0" fitWidth="269.0" layoutX="309.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../2-1.png" />
+                              <Image url="@../resources/2-1.png" />
                            </image>
                         </ImageView>
                      </children>
