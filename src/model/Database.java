@@ -55,6 +55,22 @@ public class Database implements Serializable {
 		person.setNationality(nationality);
 	}
 	
+	public Person searchByName(String name) {
+		return nameAVLTree.searchNode(name).getV();
+	}
+	
+	public Person searchByLastName(String lastName) {
+		return lastNameAVLTree.searchNode(lastName).getV();
+	}
+	
+	public Person searchByFullName(String fullName) {
+		return fullNameRBTree.search(fullName).getV();
+	}
+	
+	public Person searchByCode(String code) {
+		return codeRBTree.search(code).getV();
+	}
+	
 	public List<Person> getPersonsByName() {
 		persons.clear();
 		nameAVLTree.inOrder(persons);

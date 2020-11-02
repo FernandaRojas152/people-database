@@ -6,9 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+
 import javax.imageio.ImageIO;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,11 +27,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import model.Database;
 import model.Person;
 import trie.Trie;
@@ -41,6 +44,9 @@ public class PrincipalWindowController {
 	public final String CODE = "Code";
 	public final String MALE = "Male";
 	public final String FEMALE = "Female";
+	
+	@FXML
+	private TabPane tabPane;
 	
 	@FXML
 	private TextField name;
@@ -74,6 +80,9 @@ public class PrincipalWindowController {
 	
 	@FXML
     private ScrollPane scroll;
+	
+	@FXML
+	private Tab tabSearch;
 	
 	@FXML
 	private Tab tabModify;
@@ -121,48 +130,37 @@ public class PrincipalWindowController {
 		}	
 		searchOptions.setItems(FXCollections.observableArrayList(NAME, LAST_NAME, FULL_NAME, CODE));
 		genders.setItems(FXCollections.observableArrayList(MALE, FEMALE));
+		modifyGenders.setItems(FXCollections.observableArrayList(MALE, FEMALE));
 	}
 	
 	void updateEmergenceList() {
 		
-		trie = new Trie();
-		trie.insert("Edgar Allan Poe");
-		trie.insert("James Barrie");
-		trie.insert("Emily Bronte");
-		trie.insert("Euripides");
-		trie.insert("Ernest Hemingway");
-		trie.insert("Arthur Conan Doyle");
-		trie.insert("Lewis Carroll");
-		trie.insert("JRR Tolkien");
-		trie.insert("Elvira Sastre");
-		trie.insert("Alejandra Pizarnik");
-		
-//		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-//			@Override
-//			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
-//				if((int)newValue==0) {
-//					trie = new Trie();
-//					for (Person person : database.getPersonsByName()) {
-//						trie.insert(person.getName());
-//					}
-//				}else if((int)newValue==1) {
-//					trie = new Trie();
-//					for (Person person : database.getPersonsByLastName()) {
-//						trie.insert(person.getLastName());
-//					}
-//				}else if((int)newValue==2) {
-//					trie = new Trie();
-//					for (Person person : database.getPersonsByFullName()) {
-//						trie.insert(person.getName()+" "+person.getLastName());
-//					}
-//				}else if((int)newValue==3) {
-//					trie = new Trie();
-//					for (Person person : database.getPersonsByCode()) {
-//						trie.insert(person.getCode());
-//					}
-//				}
-//			}
-//		});
+		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
+				if((int)newValue==0) {
+					trie = new Trie();
+					for (Person person : database.getPersonsByName()) {
+						trie.insert(person.getName());
+					}
+				}else if((int)newValue==1) {
+					trie = new Trie();
+					for (Person person : database.getPersonsByLastName()) {
+						trie.insert(person.getLastName());
+					}
+				}else if((int)newValue==2) {
+					trie = new Trie();
+					for (Person person : database.getPersonsByFullName()) {
+						trie.insert(person.getName()+" "+person.getLastName());
+					}
+				}else if((int)newValue==3) {
+					trie = new Trie();
+					for (Person person : database.getPersonsByCode()) {
+						trie.insert(person.getCode());
+					}
+				}
+			}
+		});
 		
 		auto.textProperty().addListener(new ChangeListener<String>() {
 			
@@ -181,24 +179,68 @@ public class PrincipalWindowController {
 					scroll.setContent(gridPane);
 					matches.setText("("+data.size()+") results");
 					
-					for (int i = 0; i < data.size(); i++) {
-						Label l= new Label(data.get(i)+" ");
-						gridPane.add(l, 1, i);
-						Button edit = new Button("edit");
-						gridPane.add(edit, 2, i);
-						scroll.setContent(gridPane);
-						edit.setOnAction(new EventHandler<ActionEvent>() {
+					if(data.size()<=100) {
+						for (int i = 0; i < data.size(); i++) {
+							Label label = new Label(data.get(i));
+							gridPane.add(label, 1, i);
 							
-							@Override
-							public void handle(ActionEvent arg0) {
-								tabModify.setDisable(false);
-								
+							if(data.size()<=20) {
+								Button edit = new Button("edit");
+								gridPane.add(edit, 2, i);
+								edit.setOnAction(new EventHandler<ActionEvent>() {
+									
+									@Override
+									public void handle(ActionEvent arg0) {
+										auto.setText(null);
+										gridPane.getChildren().clear();
+										scroll.setContent(gridPane);
+										matches.setText(null);
+										tabPane.getSelectionModel().select(tabModify);
+										tabModify.setDisable(false);
+										searchPerson(label.getText());
+									}
+								});
 							}
-						});
+							scroll.setContent(gridPane);
+						}
 					}
 				}
 			}
 		});
+	}
+	
+	private void searchPerson(String data) {
+		
+		Person person;
+		
+		if(searchOptions.getValue().equals(NAME)) {
+			person = database.searchByName(data);
+		}else if(searchOptions.getValue().equals(LAST_NAME)) {
+			person = database.searchByLastName(data);
+		}else if(searchOptions.getValue().equals(FULL_NAME)) {
+			person = database.searchByFullName(data);
+		}else {
+			person = database.searchByCode(data);
+		}
+		
+		modifyName.setText(person.getName());
+		modifyLastName.setText(person.getLastName());
+		code.setText(person.getCode());
+		modifyGenders.setValue(person.getGender());
+		modifyBirthdate.setValue(person.getBirthDate());
+		modifyHeight.setText(person.getHeight()+"");
+		modifyNationality.setText(person.getNationality());
+		try {
+			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			modifyphoto.setImage(image);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -237,17 +279,24 @@ public class PrincipalWindowController {
 	}
 
 	@FXML
-	void modifyPerson(ActionEvent event) {
-
+	public void modifyPerson(ActionEvent event) {
+		database.updatePerson(code.getText(), modifyName.getText(), modifyLastName.getText(), modifyGenders.getValue(),
+				modifyBirthdate.getValue(), Double.parseDouble(modifyHeight.getText()), modifyNationality.getText());
+		tabModify.setDisable(true);
+		tabPane.getSelectionModel().select(tabSearch);
+		updateEmergenceList();
 	}
 	
 	@FXML
-	void deletePerson(ActionEvent event) {
-		
+	public void deletePerson(ActionEvent event) {
+		database.deletePerson(modifyName.getText(), modifyLastName.getText(), code.getText());
+		tabModify.setDisable(true);
+		tabPane.getSelectionModel().select(tabSearch);
+		updateEmergenceList();
 	}
 	
 	@FXML
-	void generateData(ActionEvent event) {
+	public void generateData(ActionEvent event) {
 
 	}
 	
