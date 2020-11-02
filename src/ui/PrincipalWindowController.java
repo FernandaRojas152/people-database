@@ -284,6 +284,7 @@ public class PrincipalWindowController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		updateEmergenceList();
 	}
 
 	@FXML

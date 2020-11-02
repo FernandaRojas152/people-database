@@ -65,7 +65,10 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="matches" layoutX="193.0" layoutY="14.0" />
+                        <Label fx:id="matches" layoutX="193.0" layoutY="14.0" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
                         <TextField fx:id="auto" layoutX="17.0" layoutY="42.0" prefHeight="25.0" prefWidth="255.0" />
                       <AnchorPane layoutX="98.0" layoutY="94.0" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="175.0">
                            <children>
