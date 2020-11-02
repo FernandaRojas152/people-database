@@ -24,7 +24,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Database;
 import model.Person;
@@ -61,28 +60,19 @@ public class PrincipalWindowController {
 	private ImageView photo;
 	
 	@FXML
-	private GridPane container;
-
+	private ChoiceBox<String> searchOptions;
+	
 	@FXML
 	private TextField auto;
 	
 	@FXML
 	private Label matches;
-
-	@FXML
-	private TextField delete;
-
-	@FXML
-	private TextField modify;
-	
-	@FXML
-	private ChoiceBox<String> searchOptions;	
 	
 	@FXML
     private ScrollPane scroll;
 
-	private Trie trie;
 	private Database database;
+	private Trie trie;
 
 	@FXML
 	public void initialize() {
@@ -103,6 +93,7 @@ public class PrincipalWindowController {
 	
 	void updateEmergenceList() {
 		
+//		trie = new Trie();
 //		trie.insert("Edgar Allan Poe");
 //		trie.insert("James Barrie");
 //		trie.insert("Emily Bronte");
@@ -113,26 +104,26 @@ public class PrincipalWindowController {
 //		trie.insert("JRR Tolkien");
 //		trie.insert("Elvira Sastre");
 //		trie.insert("Alejandra Pizarnik");
-		
-		searchOptions.accessibleTextProperty().addListener(new ChangeListener<String>() {
+//		
+		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
-			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if(searchOptions.getValue()==NAME) {
+			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
+				if((int)newValue==0) {
 					trie = new Trie();
 					for (Person person : database.getPersonsByName()) {
 						trie.insert(person.getName());
 					}
-				}else if(searchOptions.getValue()==LAST_NAME) {
+				}else if((int)newValue==1) {
 					trie = new Trie();
 					for (Person person : database.getPersonsByLastName()) {
 						trie.insert(person.getLastName());
 					}
-				}else if(searchOptions.getValue()==FULL_NAME) {
+				}else if((int)newValue==2) {
 					trie = new Trie();
 					for (Person person : database.getPersonsByFullName()) {
 						trie.insert(person.getName()+" "+person.getLastName());
 					}
-				}else if(searchOptions.getValue()==CODE) {
+				}else if((int)newValue==3) {
 					trie = new Trie();
 					for (Person person : database.getPersonsByCode()) {
 						trie.insert(person.getCode());
@@ -152,8 +143,9 @@ public class PrincipalWindowController {
 				} else {
 					List<String> data= trie.autocomplete(entry);
 					suggestions.getChildren().clear();
+					scroll.setContent(suggestions);
 					matches.setText("("+data.size()+") results");
-					for (int i = 0; i < 100; i++) {
+					for (int i = 0; i < data.size(); i++) {
 						Label l= new Label(data.get(i));
 						suggestions.getChildren().add(l);
 						scroll.setContent(suggestions);

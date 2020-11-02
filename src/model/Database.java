@@ -27,10 +27,10 @@ public class Database implements Serializable {
 		persons = new ArrayList<Person>();
 	}
 
-	public void createPerson(String name, String lastName, String sex, LocalDate birthDate, Double height, 
+	public void createPerson(String name, String lastName, String gender, LocalDate birthDate, Double height, 
 			String nationality) throws IllegalArgumentException {
 		String code = UUID.randomUUID().toString();
-		Person person = new Person(code, name, lastName, sex, birthDate, height, nationality);
+		Person person = new Person(code, name, lastName, gender, birthDate, height, nationality);
 		nameAVLTree.addNode(name, person);
 		lastNameAVLTree.addNode(lastName, person);
 		fullNameRBTree.insertRB(name+" "+lastName, person);
