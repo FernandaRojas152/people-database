@@ -13,45 +13,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<<<<<<< HEAD
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1B5EE3;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrincipalWindowController">
-=======
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrincipalWindowController">
->>>>>>> branch 'master' of https://github.com/FernandaRojas152/people-database.git
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrincipalWindowController">
    <children>
-<<<<<<< HEAD
-      <TabPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1B5EE3;" tabClosingPolicy="UNAVAILABLE">
-=======
       <TabPane fx:id="tabPane" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
->>>>>>> branch 'master' of https://github.com/FernandaRojas152/people-database.git
         <tabs>
             <Tab text="Start">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1B5EE3;">
                      <children>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-<<<<<<< HEAD
-                        <TextField fx:id="amountData" layoutX="210.0" layoutY="161.0" text="1000000000" />
-                        <Text fill="WHITE" layoutX="193.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME!" wrappingWidth="277.66015625">
-=======
                         <TextField fx:id="amountData" layoutX="262.0" layoutY="180.0" prefHeight="25.0" prefWidth="73.0" text="1000000000" />
-                        <Text layoutX="199.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME!" wrappingWidth="202.99346923828125">
->>>>>>> branch 'master' of https://github.com/FernandaRojas152/people-database.git
+                        <Button layoutX="266.0" layoutY="215.0" mnemonicParsing="false" onAction="#generateData" text="Generate" />
+                        <Label layoutX="250.0" layoutY="153.0" text="Enter data amount" textFill="WHITE" />
+                        <Button layoutX="540.0" layoutY="330.0" mnemonicParsing="false" onAction="#saveData" text="Save" />
+                        <Label layoutX="202.0" layoutY="52.0" text="WELCOME!" textFill="WHITE">
                            <font>
                               <Font size="39.0" />
                            </font>
-                        </Text>
-<<<<<<< HEAD
-                        <Button layoutX="252.0" layoutY="218.0" mnemonicParsing="false" onAction="#generateData" text="Generate" />
-                        <Label layoutX="141.0" layoutY="111.0" text="Please input the amount of data you want to generate" textFill="WHITE" />
-                        <Button disable="true" layoutX="455.0" layoutY="309.0" mnemonicParsing="false" onAction="#saveData" text="Save data" />
-=======
-                        <Button layoutX="266.0" layoutY="215.0" mnemonicParsing="false" onAction="#generateData" text="Generate" />
-                        <Label layoutX="250.0" layoutY="153.0" text="Enter data amount" />
-                        <Button layoutX="540.0" layoutY="330.0" mnemonicParsing="false" onAction="#saveData" text="Save" />
->>>>>>> branch 'master' of https://github.com/FernandaRojas152/people-database.git
+                        </Label>
                      </children></AnchorPane>
               </content>
             </Tab>

@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('fonts/BebasNeue-Regular.ttf');
+}
+
+.label {
+    -fx-font-family: 'Bebas Neue';
+    -fx-font-size: 10;
+}
+
+.button {
+    -fx-font-family: 'Bebas Neue';
+    -fx-background-color: linear-gradient(to top right, #ff7f50, #6a5acd);
+}
