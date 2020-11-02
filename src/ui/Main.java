@@ -26,7 +26,6 @@ public class Main extends Application{
 			primaryStage.setResizable(false);
 			primaryStage.show();
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
 				@Override
 				public void handle(WindowEvent arg0) {
 					principal.saveData();

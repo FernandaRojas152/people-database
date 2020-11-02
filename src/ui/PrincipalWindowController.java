@@ -63,7 +63,7 @@ public class PrincipalWindowController {
 	@FXML
 	public void initialize() {
 		database = new Database();
-//		loadData();
+		//		loadData();
 		trie= new Trie();
 		trie.insert("Edgar Allan Poe");
 		trie.insert("James Barrie");
@@ -114,7 +114,7 @@ public class PrincipalWindowController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	void createPerson(ActionEvent event) {
 
@@ -127,6 +127,9 @@ public class PrincipalWindowController {
 
 	@FXML
 	void generateData(ActionEvent event) {
+//		if() {
+//			
+//		}
 
 	}
 
