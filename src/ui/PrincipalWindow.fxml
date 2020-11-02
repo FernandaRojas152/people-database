@@ -12,7 +12,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -66,19 +65,15 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="matches" layoutX="176.0" layoutY="21.0" />
-                        <TextField fx:id="auto" layoutX="17.0" layoutY="42.0" prefHeight="25.0" prefWidth="256.0" />
+                        <Label fx:id="matches" layoutX="193.0" layoutY="14.0" />
+                        <TextField fx:id="auto" layoutX="17.0" layoutY="42.0" prefHeight="25.0" prefWidth="255.0" />
                       <AnchorPane layoutX="98.0" layoutY="94.0" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="175.0">
                            <children>
-                              <ScrollPane fx:id="scroll" layoutX="-81.0" layoutY="-26.0" prefHeight="291.0" prefWidth="255.0">
-                                 <content>
-                                    <VBox fx:id="suggestions" prefHeight="200.0" prefWidth="100.0" />
-                                 </content>
-                              </ScrollPane>
+                              <ScrollPane fx:id="scroll" layoutX="-81.0" layoutY="-26.0" prefHeight="291.0" prefWidth="255.0" />
                            </children>
                         </AnchorPane>
                         <ChoiceBox fx:id="searchOptions" layoutX="309.0" layoutY="42.0" prefWidth="150.0" />
-                        <ImageView fitHeight="338.0" fitWidth="269.0" layoutX="309.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="311.0" fitWidth="294.0" layoutX="294.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/2-1.png" />
                            </image>
@@ -98,20 +93,16 @@
                         <Label layoutX="240.0" layoutY="70.0" text="Last name" />
                         <TextField fx:id="modifyLastName" layoutX="360.0" layoutY="70.0" />
                         <Label layoutX="240.0" layoutY="110.0" text="Code" />
-                        <TextField fx:id="code" editable="false" layoutX="360.0" layoutY="110.0" prefHeight="25.0" prefWidth="200.0">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="modifyHeight" layoutX="360.0" layoutY="230.0" />
+                        <Label fx:id="code" layoutX="360.0" layoutY="110.0" />
                         <Label layoutX="240.0" layoutY="150.0" text="Gender" />
+                        <ChoiceBox fx:id="modifyGenders" layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
                         <Label layoutX="240.0" layoutY="190.0" text="Birth date" />
+                        <DatePicker fx:id="modifyBirthdate" layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" />
                         <Label layoutX="240.0" layoutY="230.0" text="Height" />
+                        <TextField fx:id="modifyHeight" layoutX="360.0" layoutY="230.0" />
                         <Label layoutX="240.0" layoutY="270.0" text="Nationality" />
                         <TextField fx:id="modifyNationality" layoutX="360.0" layoutY="270.0" />
                         <ImageView fx:id="modifyphoto" fitHeight="170.0" fitWidth="170.0" layoutX="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
-                        <ChoiceBox fx:id="modifyGenders" layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
-                        <DatePicker fx:id="modifyBirthdate" layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
