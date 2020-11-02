@@ -5,10 +5,10 @@
 
 .label {
     -fx-font-family: 'Bebas Neue';
-    -fx-font-size: 10;
+    -fx-font-size: 15;
 }
 
 .button {
     -fx-font-family: 'Bebas Neue';
-    -fx-background-color: linear-gradient(to top right, #ff7f50, #6a5acd);
+    -fx-background-color: linear-gradient(to top right, #F26419, #F6AE2D);
 }
