@@ -47,6 +47,7 @@ public class Database implements Serializable {
 	public void updatePerson(String code, String name, String lastName, String gender, LocalDate birthDate, Double height, 
 			String nationality) {
 		Person person = codeRBTree.search(code).getV();
+		fullNameRBTree.search(person.getName()+" "+person.getLastName()).setK(name+" "+lastName);;
 		person.setName(name);
 		person.setLastName(lastName);
 		person.setGender(gender);
