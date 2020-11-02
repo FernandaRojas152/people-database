@@ -18,8 +18,9 @@ public class Main extends Application{
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PrincipalWindow.fxml"));
 			Parent root = fxmlLoader.load();
-			setPrincipal(fxmlLoader.getController());
+			principal = fxmlLoader.getController();
 			Scene scene= new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/resources/fontstyle.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("database.png")));
 			primaryStage.setTitle("database");
@@ -40,13 +41,4 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
-
-	public PrincipalWindowController getPrincipal() {
-		return principal;
-	}
-
-	public void setPrincipal(PrincipalWindowController principal) {
-		this.principal = principal;
-	}
-
 }
