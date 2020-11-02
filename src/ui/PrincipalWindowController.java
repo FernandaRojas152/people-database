@@ -94,7 +94,7 @@ public class PrincipalWindowController {
 	private TextField modifyLastName;
 	
 	@FXML
-	private TextField code;
+	private Label code;
 	
 	@FXML
 	private ChoiceBox<String> modifyGenders;
@@ -135,29 +135,38 @@ public class PrincipalWindowController {
 	
 	void updateEmergenceList() {
 		
+		searchOptions.setValue(null);
+		trie = new Trie();
+		
 		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
-				if((int)newValue==0) {
-					trie = new Trie();
-					for (Person person : database.getPersonsByName()) {
-						trie.insert(person.getName());
+				
+				auto.setText(null);
+				scroll.setContent(null);
+				try {
+					if((int)newValue==0) {
+						trie = new Trie();
+						for (Person person : database.getPersonsByName()) {
+							trie.insert(person.getName());
+						}
+					}else if((int)newValue==1) {
+						trie = new Trie();
+						for (Person person : database.getPersonsByLastName()) {
+							trie.insert(person.getLastName());
+						}
+					}else if((int)newValue==2) {
+						trie = new Trie();
+						for (Person person : database.getPersonsByFullName()) {
+							trie.insert(person.getName()+" "+person.getLastName());
+						}
+					}else if((int)newValue==3) {
+						trie = new Trie();
+						for (Person person : database.getPersonsByCode()) {
+							trie.insert(person.getCode());
+						}
 					}
-				}else if((int)newValue==1) {
-					trie = new Trie();
-					for (Person person : database.getPersonsByLastName()) {
-						trie.insert(person.getLastName());
-					}
-				}else if((int)newValue==2) {
-					trie = new Trie();
-					for (Person person : database.getPersonsByFullName()) {
-						trie.insert(person.getName()+" "+person.getLastName());
-					}
-				}else if((int)newValue==3) {
-					trie = new Trie();
-					for (Person person : database.getPersonsByCode()) {
-						trie.insert(person.getCode());
-					}
+				}catch (NullPointerException e) {
 				}
 			}
 		});
@@ -230,6 +239,7 @@ public class PrincipalWindowController {
 		modifyBirthdate.setValue(person.getBirthDate());
 		modifyHeight.setText(person.getHeight()+"");
 		modifyNationality.setText(person.getNationality());
+		
 		try {
 			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);

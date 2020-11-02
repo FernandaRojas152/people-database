@@ -88,20 +88,16 @@
                         <Label layoutX="240.0" layoutY="70.0" text="Last name" />
                         <TextField fx:id="modifyLastName" layoutX="360.0" layoutY="70.0" />
                         <Label layoutX="240.0" layoutY="110.0" text="Code" />
-                        <TextField fx:id="code" editable="false" layoutX="360.0" layoutY="110.0" prefHeight="25.0" prefWidth="200.0">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="modifyHeight" layoutX="360.0" layoutY="230.0" />
+                        <Label fx:id="code" layoutX="360.0" layoutY="110.0" />
                         <Label layoutX="240.0" layoutY="150.0" text="Gender" />
+                        <ChoiceBox fx:id="modifyGenders" layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
                         <Label layoutX="240.0" layoutY="190.0" text="Birth date" />
+                        <DatePicker fx:id="modifyBirthdate" layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" />
                         <Label layoutX="240.0" layoutY="230.0" text="Height" />
+                        <TextField fx:id="modifyHeight" layoutX="360.0" layoutY="230.0" />
                         <Label layoutX="240.0" layoutY="270.0" text="Nationality" />
                         <TextField fx:id="modifyNationality" layoutX="360.0" layoutY="270.0" />
                         <ImageView fx:id="modifyphoto" fitHeight="170.0" fitWidth="170.0" layoutX="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
-                        <ChoiceBox fx:id="modifyGenders" layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
-                        <DatePicker fx:id="modifyBirthdate" layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
