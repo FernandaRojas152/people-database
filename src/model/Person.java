@@ -7,17 +7,17 @@ public class Person {
 	private String code;
 	private String name;
 	private String lastName;
-	private String sex;
+	private String gender;
 	private LocalDate birthDate;
 	private Double height;
 	private String nationality;
 	
-	public Person(String code, String name, String lastName, String sex, LocalDate birthDate, Double height,
+	public Person(String code, String name, String lastName, String gender, LocalDate birthDate, Double height,
 			String nationality) {
 		this.code = code;
 		this.name = name;
 		this.lastName = lastName;
-		this.sex = sex;
+		this.gender = gender;
 		this.birthDate = birthDate;
 		this.height = height;
 		this.nationality = nationality;
@@ -47,12 +47,12 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public LocalDate getBirthDate() {
