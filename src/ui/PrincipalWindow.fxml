@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -47,7 +48,7 @@
                         <Label layoutX="20.0" layoutY="230.0" text="Nationality" />
                         <TextField fx:id="name" layoutX="140.0" layoutY="30.0" />
                         <TextField fx:id="lastName" layoutX="140.0" layoutY="70.0" />
-                        <DatePicker fx:id="birthdate" layoutX="140.0" layoutY="150.0" prefHeight="25.0" prefWidth="149.0" />
+                        <DatePicker fx:id="birthdate" layoutX="140.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" />
                         <TextField fx:id="height" layoutX="140.0" layoutY="190.0" />
                         <TextField fx:id="nationality" layoutX="140.0" layoutY="230.0" />
                         <ImageView fx:id="photo" fitHeight="170.0" fitWidth="170.0" layoutX="360.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
@@ -60,11 +61,15 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="matches" layoutX="286.0" layoutY="30.0" minHeight="25.0" />
+                        <Label fx:id="matches" layoutX="176.0" layoutY="21.0" />
                         <TextField fx:id="auto" layoutX="17.0" layoutY="42.0" prefHeight="25.0" prefWidth="256.0" />
                       <AnchorPane layoutX="98.0" layoutY="94.0" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="175.0">
                            <children>
-                              <ScrollPane fx:id="scroll" layoutX="-81.0" layoutY="-26.0" prefHeight="291.0" prefWidth="255.0" />
+                              <ScrollPane fx:id="scroll" layoutX="-81.0" layoutY="-26.0" prefHeight="291.0" prefWidth="255.0">
+                                 <content>
+                                    <VBox fx:id="suggestions" prefHeight="200.0" prefWidth="100.0" />
+                                 </content>
+                              </ScrollPane>
                            </children>
                         </AnchorPane>
                         <ChoiceBox fx:id="searchOptions" layoutX="17.0" layoutY="17.0" prefWidth="150.0" />
@@ -72,27 +77,31 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Modify">
+            <Tab fx:id="tabModify" text="Modify">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button layoutX="480.0" layoutY="330.0" mnemonicParsing="false" onAction="#modifyPerson" text="Update" />
                         <Button layoutX="540.0" layoutY="330.0" mnemonicParsing="false" onAction="#deletePerson" text="Delete" />
                         <Label layoutX="240.0" layoutY="30.0" text="Name" />
-                        <TextField fx:id="modify1" layoutX="360.0" layoutY="30.0" />
+                        <TextField fx:id="modifyName" layoutX="360.0" layoutY="30.0" />
                         <Label layoutX="240.0" layoutY="70.0" text="Last name" />
-                        <TextField fx:id="modify11" layoutX="360.0" layoutY="70.0" />
+                        <TextField fx:id="modifyLastName" layoutX="360.0" layoutY="70.0" />
                         <Label layoutX="240.0" layoutY="110.0" text="Code" />
-                        <TextField fx:id="modify111" disable="true" layoutX="360.0" layoutY="110.0" />
-                        <TextField fx:id="modify11111" layoutX="360.0" layoutY="190.0" />
-                        <TextField fx:id="modify111111" layoutX="360.0" layoutY="230.0" />
+                        <TextField fx:id="code" disable="true" layoutX="360.0" layoutY="110.0" prefHeight="25.0" prefWidth="150.0">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="modifyHeight" layoutX="360.0" layoutY="230.0" />
                         <Label layoutX="240.0" layoutY="150.0" text="Gender" />
                         <Label layoutX="240.0" layoutY="190.0" text="Birth date" />
                         <Label layoutX="240.0" layoutY="230.0" text="Height" />
                         <Label layoutX="240.0" layoutY="270.0" text="Nationality" />
-                        <TextField fx:id="modify1111111" layoutX="360.0" layoutY="270.0" />
-                        <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
-                        <ChoiceBox layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
+                        <TextField fx:id="modifyNationality" layoutX="360.0" layoutY="270.0" />
+                        <ImageView fx:id="modifyphoto" fitHeight="170.0" fitWidth="170.0" layoutX="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
+                        <ChoiceBox fx:id="modifyGenders" layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
+                        <DatePicker fx:id="modifyBirthdate" layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" />
                      </children></AnchorPane>
               </content>
             </Tab>

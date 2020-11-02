@@ -14,16 +14,20 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Database;
 import model.Person;
@@ -70,6 +74,33 @@ public class PrincipalWindowController {
 	
 	@FXML
     private ScrollPane scroll;
+	
+	@FXML
+	private Tab tabModify;
+	
+	@FXML
+	private TextField modifyName;
+	
+	@FXML
+	private TextField modifyLastName;
+	
+	@FXML
+	private TextField code;
+	
+	@FXML
+	private ChoiceBox<String> modifyGenders;
+	
+	@FXML
+	private DatePicker modifyBirthdate;
+	
+	@FXML
+	private TextField modifyHeight;
+	
+	@FXML
+	private TextField modifyNationality;
+	
+	@FXML
+	private ImageView modifyphoto;
 
 	private Database database;
 	private Trie trie;
@@ -77,6 +108,7 @@ public class PrincipalWindowController {
 	@FXML
 	public void initialize() {
 		database = new Database();
+		tabModify.setDisable(true);
 		loadData();
 		updateEmergenceList();
 		try {
@@ -93,62 +125,76 @@ public class PrincipalWindowController {
 	
 	void updateEmergenceList() {
 		
-//		trie = new Trie();
-//		trie.insert("Edgar Allan Poe");
-//		trie.insert("James Barrie");
-//		trie.insert("Emily Bronte");
-//		trie.insert("Euripides");
-//		trie.insert("Ernest Hemingway");
-//		trie.insert("Arthur Conan Doyle");
-//		trie.insert("Lewis Carroll");
-//		trie.insert("JRR Tolkien");
-//		trie.insert("Elvira Sastre");
-//		trie.insert("Alejandra Pizarnik");
-//		
-		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
-				if((int)newValue==0) {
-					trie = new Trie();
-					for (Person person : database.getPersonsByName()) {
-						trie.insert(person.getName());
-					}
-				}else if((int)newValue==1) {
-					trie = new Trie();
-					for (Person person : database.getPersonsByLastName()) {
-						trie.insert(person.getLastName());
-					}
-				}else if((int)newValue==2) {
-					trie = new Trie();
-					for (Person person : database.getPersonsByFullName()) {
-						trie.insert(person.getName()+" "+person.getLastName());
-					}
-				}else if((int)newValue==3) {
-					trie = new Trie();
-					for (Person person : database.getPersonsByCode()) {
-						trie.insert(person.getCode());
-					}
-				}
-			}
-		});
+		trie = new Trie();
+		trie.insert("Edgar Allan Poe");
+		trie.insert("James Barrie");
+		trie.insert("Emily Bronte");
+		trie.insert("Euripides");
+		trie.insert("Ernest Hemingway");
+		trie.insert("Arthur Conan Doyle");
+		trie.insert("Lewis Carroll");
+		trie.insert("JRR Tolkien");
+		trie.insert("Elvira Sastre");
+		trie.insert("Alejandra Pizarnik");
+		
+//		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+//			@Override
+//			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
+//				if((int)newValue==0) {
+//					trie = new Trie();
+//					for (Person person : database.getPersonsByName()) {
+//						trie.insert(person.getName());
+//					}
+//				}else if((int)newValue==1) {
+//					trie = new Trie();
+//					for (Person person : database.getPersonsByLastName()) {
+//						trie.insert(person.getLastName());
+//					}
+//				}else if((int)newValue==2) {
+//					trie = new Trie();
+//					for (Person person : database.getPersonsByFullName()) {
+//						trie.insert(person.getName()+" "+person.getLastName());
+//					}
+//				}else if((int)newValue==3) {
+//					trie = new Trie();
+//					for (Person person : database.getPersonsByCode()) {
+//						trie.insert(person.getCode());
+//					}
+//				}
+//			}
+//		});
 		
 		auto.textProperty().addListener(new ChangeListener<String>() {
+			
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				
 				String entry = auto.getText();
-				VBox suggestions= new VBox();
+				GridPane gridPane = new GridPane();
+				
 				if (entry.length()==0) {
-					suggestions.getChildren().clear();
-					scroll.setContent(suggestions);
+					gridPane.getChildren().clear();
+					scroll.setContent(gridPane);
 				} else {
 					List<String> data= trie.autocomplete(entry);
-					suggestions.getChildren().clear();
-					scroll.setContent(suggestions);
+					gridPane.getChildren().clear();
+					scroll.setContent(gridPane);
 					matches.setText("("+data.size()+") results");
+					
 					for (int i = 0; i < data.size(); i++) {
-						Label l= new Label(data.get(i));
-						suggestions.getChildren().add(l);
-						scroll.setContent(suggestions);
+						Label l= new Label(data.get(i)+" ");
+						gridPane.add(l, 1, i);
+						Button edit = new Button("edit");
+						gridPane.add(edit, 2, i);
+						scroll.setContent(gridPane);
+						edit.setOnAction(new EventHandler<ActionEvent>() {
+							
+							@Override
+							public void handle(ActionEvent arg0) {
+								tabModify.setDisable(false);
+								
+							}
+						});
 					}
 				}
 			}
@@ -191,13 +237,13 @@ public class PrincipalWindowController {
 	}
 
 	@FXML
-	void deletePerson(ActionEvent event) {
-		
-	}
-
-	@FXML
 	void modifyPerson(ActionEvent event) {
 
+	}
+	
+	@FXML
+	void deletePerson(ActionEvent event) {
+		
 	}
 	
 	@FXML
