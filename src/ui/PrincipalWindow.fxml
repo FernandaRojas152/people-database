@@ -24,15 +24,20 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #1B5EE3;">
                      <children>
                         <TextField fx:id="amountData" layoutX="425.0" layoutY="162.0" prefHeight="25.0" prefWidth="73.0" text="1000000000" />
+<<<<<<< HEAD
                         <Button layoutX="407.0" layoutY="209.0" mnemonicParsing="false" onAction="#generateData" prefHeight="35.0" prefWidth="109.0" text="Generate" textFill="WHITE" />
                         <Label layoutX="412.0" layoutY="131.0" text="Enter data amount" textFill="WHITE" />
+=======
+                        <Button layoutX="407.0" layoutY="215.0" mnemonicParsing="false" onAction="#generateData" prefHeight="35.0" prefWidth="109.0" text="Generate" textFill="WHITE" />
+                        <Label layoutX="412.0" layoutY="126.0" text="Enter data amount" textFill="WHITE" />
+>>>>>>> 774fe8cdcc84166c508df27bc07912eca0a2f4fa
                         <Button layoutX="515.0" layoutY="326.0" mnemonicParsing="false" onAction="#saveData" prefHeight="29.0" prefWidth="66.0" text="Save" textFill="WHITE" />
-                        <Text fill="WHITE" layoutX="335.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME!" wrappingWidth="239.8955078125">
+                        <Text fill="WHITE" layoutX="317.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME!" wrappingWidth="289.8955078125">
                            <font>
-                              <Font name="Impact" size="56.0" />
+                              <Font name="Impact" size="63.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="256.0" fitWidth="362.0" layoutX="6.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="265.0" fitWidth="379.0" layoutX="6.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/Motion-Design-Data-analysis.png" />
                            </image>
@@ -73,6 +78,11 @@
                            </children>
                         </AnchorPane>
                         <ChoiceBox fx:id="searchOptions" layoutX="309.0" layoutY="42.0" prefWidth="150.0" />
+                        <ImageView fitHeight="338.0" fitWidth="269.0" layoutX="309.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../2-1.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
                </content>
