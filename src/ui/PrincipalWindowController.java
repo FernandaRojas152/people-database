@@ -148,15 +148,12 @@ public class PrincipalWindowController {
 	}
 
 	private void updateEmergenceList() {
-
 		matches.setText(null);
 		searchOptions.setValue(null);
 		trie = new Trie();
-
 		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
-
 				auto.setText(null);
 				scroll.setContent(null);
 				matches.setText(null);
@@ -187,34 +184,29 @@ public class PrincipalWindowController {
 				}
 			}
 		});
-
 		auto.textProperty().addListener(new ChangeListener<String>() {
-
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
+				scroll.setVisible(true);
 				String entry = auto.getText();
 				GridPane gridPane = new GridPane();
-
 				if (entry.length()==0) {
 					gridPane.getChildren().clear();
 					scroll.setContent(gridPane);
+					scroll.setVisible(false);
 				} else {
 					List<String> data= trie.autocomplete(entry);
 					gridPane.getChildren().clear();
 					scroll.setContent(gridPane);
 					matches.setText("("+data.size()+") results");
-
 					if(data.size()<=100) {
 						for (int i = 0; i < data.size(); i++) {
 							Label label = new Label(data.get(i));
 							gridPane.add(label, 1, i);
-
 							if(data.size()<=20) {
 								Button edit = new Button("edit");
 								gridPane.add(edit, 2, i);
 								edit.setOnAction(new EventHandler<ActionEvent>() {
-
 									@Override
 									public void handle(ActionEvent arg0) {
 										auto.setText(null);
@@ -354,7 +346,7 @@ public class PrincipalWindowController {
 				catch (Exception e) {
 					e.printStackTrace();
 				}
-				progress.setViewOrder(System.currentTimeMillis()-timePassed);
+				//progress.setViewOrder(System.currentTimeMillis()-timePassed);
 				return null;
 			}
 		};
@@ -366,7 +358,7 @@ public class PrincipalWindowController {
 				System.out.println("Finish");
 				//progress.setVisible(false);
 				progress.setVisible(false);
-				time.setText(progress.getViewOrder()/1000+" sec");
+				//time.setText(progress.getViewOrder()/1000+" sec");
 			}
 		});
 		Thread loadingThread = new Thread(task);
