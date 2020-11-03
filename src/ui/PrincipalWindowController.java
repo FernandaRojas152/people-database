@@ -160,6 +160,8 @@ public class PrincipalWindowController {
 
 				auto.setText(null);
 				scroll.setContent(null);
+				matches.setText(null);
+				
 				try {
 					if((int)newValue==0) {
 						trie = new Trie();
