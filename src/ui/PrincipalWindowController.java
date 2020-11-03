@@ -115,6 +115,9 @@ public class PrincipalWindowController {
 	
 	@FXML
     private ProgressBar progress;
+	
+	@FXML
+	private Label time;
 
 	private Database database;
 	private Trie trie;
@@ -319,21 +322,24 @@ public class PrincipalWindowController {
 
 	@FXML
 	public void generateData(ActionEvent event) {
-		progress.setVisible(true);
-		Task<Void> task = new Task<Void>()
-		{
+		
+		time.setText(null);
+		double timePassed = System.currentTimeMillis();
+		
+		Task<Void> task = new Task<Void>() {
 			@Override
-			public Void call()
-			{
-				try
-				{
-					loadData();
-					return null;
+			public Void call() {
+				
+				progress.setVisible(true);
+				try {
+					for (int i = 0; i < 100000; i++) {
+						System.out.println(database.toString());
+					}
 				}
-				catch (Exception ex)
-				{
-					ex.printStackTrace();
+				catch (Exception e) {
+					e.printStackTrace();
 				}
+				progress.setViewOrder(System.currentTimeMillis()-timePassed);
 				return null;
 			}
 		};
@@ -342,8 +348,8 @@ public class PrincipalWindowController {
 
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				System.out.println("Finish");
-				//progress.setVisible(false);
+				progress.setVisible(false);
+				time.setText(progress.getViewOrder()/1000+" sec");
 			}
 		});
 		Thread loadingThread = new Thread(task);
