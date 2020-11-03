@@ -112,10 +112,10 @@ public class PrincipalWindowController {
 
 	@FXML
 	private ImageView modifyphoto;
-
+	
 	@FXML
-	private ProgressBar progress;
-
+    private ProgressBar progress;
+	
 	@FXML
 	private Label time;
 
@@ -132,12 +132,11 @@ public class PrincipalWindowController {
 			final String urlStr = "https://thispersondoesnotexist.com/image";
 			final URL url = new URL(urlStr);
 			final HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
+			        .openConnection();
 			connection.setRequestProperty(
-					"User-Agent",
-					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+			    "User-Agent",
+			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
-			//			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			photo.setImage(image);
 		} catch (IOException e) {
@@ -157,6 +156,8 @@ public class PrincipalWindowController {
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
 				auto.setText(null);
 				scroll.setContent(null);
+				matches.setText(null);
+				
 				try {
 					if((int)newValue==0) {
 						trie = new Trie();
@@ -252,12 +253,11 @@ public class PrincipalWindowController {
 			final String urlStr = "https://thispersondoesnotexist.com/image";
 			final URL url = new URL(urlStr);
 			final HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
+			        .openConnection();
 			connection.setRequestProperty(
-					"User-Agent",
-					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+			    "User-Agent",
+			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
-			//			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			modifyphoto.setImage(image);
 		} catch (MalformedURLException e) {
@@ -281,14 +281,13 @@ public class PrincipalWindowController {
 			final String urlStr = "https://thispersondoesnotexist.com/image";
 			final URL url = new URL(urlStr);
 			final HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
+			        .openConnection();
 			connection.setRequestProperty(
-					"User-Agent",
-					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+			    "User-Agent",
+			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
-			//			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-			photo.setImage(image);
+			modifyphoto.setImage(image);
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setHeaderText("Invalid Entry");
@@ -330,11 +329,14 @@ public class PrincipalWindowController {
 
 	@FXML
 	public void generateData(ActionEvent event) {
+		
 		time.setText(null);
 		double timePassed = System.currentTimeMillis();
+		
 		Task<Void> task = new Task<Void>() {
 			@Override
 			public Void call() {
+				
 				progress.setVisible(true);
 				try {
 					for (int i = 0; i < 100000; i++) {
