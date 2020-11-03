@@ -38,7 +38,8 @@ import model.Database;
 import model.Person;
 import trie.Trie;
 
-public class PrincipalWindowController {
+public class PrincipalWindowController {    
+
 	public final String NAME = "Name";
 	public final String LAST_NAME = "Last Name";
 	public final String FULL_NAME = "Full name";
@@ -114,6 +115,9 @@ public class PrincipalWindowController {
 	
 	@FXML
     private ProgressBar progress;
+	
+	@FXML
+	private Label time;
 
 	private Database database;
 	private Trie trie;
@@ -145,12 +149,15 @@ public class PrincipalWindowController {
 	}
 
 	private void updateEmergenceList() {
+
 		matches.setText(null);
 		searchOptions.setValue(null);
 		trie = new Trie();
+
 		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
+
 				auto.setText(null);
 				scroll.setContent(null);
 				try {
@@ -179,29 +186,34 @@ public class PrincipalWindowController {
 				}
 			}
 		});
+
 		auto.textProperty().addListener(new ChangeListener<String>() {
+
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				scroll.setVisible(true);
+
 				String entry = auto.getText();
 				GridPane gridPane = new GridPane();
+
 				if (entry.length()==0) {
 					gridPane.getChildren().clear();
 					scroll.setContent(gridPane);
-					scroll.setVisible(false);
 				} else {
 					List<String> data= trie.autocomplete(entry);
 					gridPane.getChildren().clear();
 					scroll.setContent(gridPane);
 					matches.setText("("+data.size()+") results");
+
 					if(data.size()<=100) {
 						for (int i = 0; i < data.size(); i++) {
 							Label label = new Label(data.get(i));
 							gridPane.add(label, 1, i);
+
 							if(data.size()<=20) {
 								Button edit = new Button("edit");
 								gridPane.add(edit, 2, i);
 								edit.setOnAction(new EventHandler<ActionEvent>() {
+
 									@Override
 									public void handle(ActionEvent arg0) {
 										auto.setText(null);
@@ -318,25 +330,36 @@ public class PrincipalWindowController {
 
 	@FXML
 	public void generateData(ActionEvent event) {
-		progress.setVisible(true);
-		Task<Void> task = new Task<Void>(){
+		
+		time.setText(null);
+		double timePassed = System.currentTimeMillis();
+		
+		Task<Void> task = new Task<Void>() {
 			@Override
-			public Void call(){
-				try{
-					loadData();
-					return null;
-				}catch (Exception ex){
-					ex.printStackTrace();
+			public Void call() {
+				
+				progress.setVisible(true);
+				try {
+					for (int i = 0; i < 100000; i++) {
+						System.out.println(database.toString());
+					}
 				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				progress.setViewOrder(System.currentTimeMillis()-timePassed);
 				return null;
 			}
 		};
 		progress.progressProperty().bind(task.progressProperty());
-		task.setOnSucceeded(new EventHandler<WorkerStateEvent>(){
+		task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				System.out.println("Finish");
 				//progress.setVisible(false);
+				progress.setVisible(false);
+				time.setText(progress.getViewOrder()/1000+" sec");
 			}
 		});
 		Thread loadingThread = new Thread(task);
