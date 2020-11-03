@@ -146,16 +146,14 @@ public class PrincipalWindowController {
 	}
 
 	private void updateEmergenceList() {
-
 		matches.setText(null);
 		searchOptions.setValue(null);
 		trie = new Trie();
-
 		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
-
 				auto.setText(null);
+				scroll.setVisible(true);
 				scroll.setContent(null);
 				try {
 					if((int)newValue==0) {

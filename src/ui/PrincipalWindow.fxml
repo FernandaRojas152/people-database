@@ -74,7 +74,7 @@
                         <TextField fx:id="auto" layoutX="17.0" layoutY="42.0" prefHeight="25.0" prefWidth="255.0" />
                       <AnchorPane layoutX="98.0" layoutY="94.0" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="175.0">
                            <children>
-                              <ScrollPane fx:id="scroll" layoutX="-81.0" layoutY="-26.0" prefHeight="291.0" prefWidth="255.0" />
+                              <ScrollPane fx:id="scroll" layoutX="-81.0" layoutY="-26.0" prefHeight="291.0" prefWidth="255.0" visible="false" />
                            </children>
                         </AnchorPane>
                         <ChoiceBox fx:id="searchOptions" layoutX="309.0" layoutY="42.0" prefWidth="150.0" />
