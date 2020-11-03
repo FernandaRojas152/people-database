@@ -137,7 +137,6 @@ public class PrincipalWindowController {
 			    "User-Agent",
 			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
-//			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			photo.setImage(image);
 		} catch (IOException e) {
@@ -267,7 +266,6 @@ public class PrincipalWindowController {
 			    "User-Agent",
 			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
-//			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			modifyphoto.setImage(image);
 		} catch (MalformedURLException e) {
@@ -288,9 +286,16 @@ public class PrincipalWindowController {
 			birthdate.setValue(null);
 			height.setText(null);
 			nationality.setText(null);
-			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
+			final String urlStr = "https://thispersondoesnotexist.com/image";
+			final URL url = new URL(urlStr);
+			final HttpURLConnection connection = (HttpURLConnection) url
+			        .openConnection();
+			connection.setRequestProperty(
+			    "User-Agent",
+			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-			photo.setImage(image);
+			modifyphoto.setImage(image);
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setHeaderText("Invalid Entry");
