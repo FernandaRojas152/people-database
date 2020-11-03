@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -119,17 +120,24 @@ public class PrincipalWindowController {
 	private Trie trie;
 
 	@FXML
-	public void initialize() {
+	public void initialize() throws Exception {
 		database = new Database();
 		tabModify.setDisable(true);
 		loadData();
 		updateEmergenceList();
 		try {
-			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
+			final String urlStr = "https://thispersondoesnotexist.com/image";
+			final URL url = new URL(urlStr);
+			final HttpURLConnection connection = (HttpURLConnection) url
+			        .openConnection();
+			connection.setRequestProperty(
+			    "User-Agent",
+			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
+//			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			photo.setImage(image);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		searchOptions.setItems(FXCollections.observableArrayList(NAME, LAST_NAME, FULL_NAME, CODE));
@@ -250,10 +258,8 @@ public class PrincipalWindowController {
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			modifyphoto.setImage(image);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -289,7 +295,6 @@ public class PrincipalWindowController {
 			alert.setContentText(e.getMessage());
 			alert.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		updateEmergenceList();
@@ -315,37 +320,34 @@ public class PrincipalWindowController {
 	@FXML
 	public void generateData(ActionEvent event) {
 		progress.setVisible(true);
-		 Task<Void> task = new Task<Void>()
-		    {
-		        @Override
-		        public Void call()
-		        {
-		            try
-		            {
-		                loadData();
-		                return null;
-		            }
-		            catch (Exception ex)
-		            {
-		               ex.printStackTrace();
-		            }
-		            return null;
-		        }
-		    };
-			progress.progressProperty().bind(task.progressProperty());
-			//SetOnSucceeded methode 
-			task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-
-				@Override
-				public void handle(WorkerStateEvent arg0) {
-					System.out.println("Finish");
-					//progress.setVisible(false);
+		Task<Void> task = new Task<Void>()
+		{
+			@Override
+			public Void call()
+			{
+				try
+				{
+					loadData();
+					return null;
 				}
-			});
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+				}
+				return null;
+			}
+		};
+		progress.progressProperty().bind(task.progressProperty());
+		task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 
-			//Start Thread
-			Thread loadingThread = new Thread(task);
-			loadingThread.start();
+			@Override
+			public void handle(WorkerStateEvent arg0) {
+				System.out.println("Finish");
+				//progress.setVisible(false);
+			}
+		});
+		Thread loadingThread = new Thread(task);
+		loadingThread.start();
 	}
 
 	public void loadData() {
@@ -356,10 +358,8 @@ public class PrincipalWindowController {
 			System.out.println(database.getPersonsByName().get(0).getName());
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -372,7 +372,6 @@ public class PrincipalWindowController {
 			out.writeObject(database);
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
