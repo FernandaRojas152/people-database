@@ -1,16 +1,10 @@
 package model;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.Serializable;
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import javax.imageio.ImageIO;
-
 import avlTree.AVLTree;
 import redBlackBST.RedBlackBST;
 
