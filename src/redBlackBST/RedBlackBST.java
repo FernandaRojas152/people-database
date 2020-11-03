@@ -44,13 +44,11 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
         insertRB(new RedBlackNode<K, V>(k, v));
     }
 
-	private void insertRB(RedBlackNode<K, V> z) throws IllegalArgumentException {
+	private void insertRB(RedBlackNode<K, V> z) {
 		RedBlackNode<K, V> y = nil;
 		RedBlackNode<K, V> x = root;
 		while (!isNil(x)){
 			y = x;	
-			if(z.k.compareTo(x.k)==0)
-				throw new IllegalArgumentException("Element already exists.");
 			if (z.k.compareTo(x.k) < 0)
 				x = x.left;
 			else 

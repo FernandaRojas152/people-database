@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -35,17 +38,17 @@ import model.Person;
 import trie.Trie;
 
 public class PrincipalWindowController {    
-	
+
 	public final String NAME = "Name";
 	public final String LAST_NAME = "Last Name";
 	public final String FULL_NAME = "Full name";
 	public final String CODE = "Code";
 	public final String MALE = "Male";
 	public final String FEMALE = "Female";
-	
+
 	@FXML
 	private TabPane tabPane;
-	
+
 	@FXML
 	private TextField name;
 
@@ -66,48 +69,51 @@ public class PrincipalWindowController {
 
 	@FXML
 	private ImageView photo;
-	
+
 	@FXML
 	private ChoiceBox<String> searchOptions;
-	
+
 	@FXML
 	private TextField auto;
-	
+
 	@FXML
 	private Label matches;
-	
+
 	@FXML
-    private ScrollPane scroll;
-	
+	private ScrollPane scroll;
+
 	@FXML
 	private Tab tabSearch;
-	
+
 	@FXML
 	private Tab tabModify;
-	
+
 	@FXML
 	private TextField modifyName;
-	
+
 	@FXML
 	private TextField modifyLastName;
-	
+
 	@FXML
 	private Label code;
-	
+
 	@FXML
 	private ChoiceBox<String> modifyGenders;
-	
+
 	@FXML
 	private DatePicker modifyBirthdate;
-	
+
 	@FXML
 	private TextField modifyHeight;
-	
+
 	@FXML
 	private TextField modifyNationality;
-	
+
 	@FXML
 	private ImageView modifyphoto;
+	
+	@FXML
+    private ProgressBar progress;
 
 	private Database database;
 	private Trie trie;
@@ -130,16 +136,17 @@ public class PrincipalWindowController {
 		genders.setItems(FXCollections.observableArrayList(MALE, FEMALE));
 		modifyGenders.setItems(FXCollections.observableArrayList(MALE, FEMALE));
 	}
-	
-	void updateEmergenceList() {
-		
+
+	private void updateEmergenceList() {
+
+		matches.setText(null);
 		searchOptions.setValue(null);
 		trie = new Trie();
-		
+
 		searchOptions.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
-				
+
 				auto.setText(null);
 				scroll.setContent(null);
 				try {
@@ -168,15 +175,15 @@ public class PrincipalWindowController {
 				}
 			}
 		});
-		
+
 		auto.textProperty().addListener(new ChangeListener<String>() {
-			
+
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				
+
 				String entry = auto.getText();
 				GridPane gridPane = new GridPane();
-				
+
 				if (entry.length()==0) {
 					gridPane.getChildren().clear();
 					scroll.setContent(gridPane);
@@ -185,17 +192,17 @@ public class PrincipalWindowController {
 					gridPane.getChildren().clear();
 					scroll.setContent(gridPane);
 					matches.setText("("+data.size()+") results");
-					
+
 					if(data.size()<=100) {
 						for (int i = 0; i < data.size(); i++) {
 							Label label = new Label(data.get(i));
 							gridPane.add(label, 1, i);
-							
+
 							if(data.size()<=20) {
 								Button edit = new Button("edit");
 								gridPane.add(edit, 2, i);
 								edit.setOnAction(new EventHandler<ActionEvent>() {
-									
+
 									@Override
 									public void handle(ActionEvent arg0) {
 										auto.setText(null);
@@ -215,11 +222,11 @@ public class PrincipalWindowController {
 			}
 		});
 	}
-	
+
 	private void searchPerson(String data) {
-		
+
 		Person person;
-		
+
 		if(searchOptions.getValue().equals(NAME)) {
 			person = database.searchByName(data);
 		}else if(searchOptions.getValue().equals(LAST_NAME)) {
@@ -229,7 +236,7 @@ public class PrincipalWindowController {
 		}else {
 			person = database.searchByCode(data);
 		}
-		
+
 		modifyName.setText(person.getName());
 		modifyLastName.setText(person.getLastName());
 		code.setText(person.getCode());
@@ -237,7 +244,7 @@ public class PrincipalWindowController {
 		modifyBirthdate.setValue(person.getBirthDate());
 		modifyHeight.setText(person.getHeight()+"");
 		modifyNationality.setText(person.getNationality());
-		
+
 		try {
 			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
@@ -250,7 +257,7 @@ public class PrincipalWindowController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	public void createPerson(ActionEvent event) {
 		try {
@@ -270,6 +277,7 @@ public class PrincipalWindowController {
 			alert.setHeaderText("Invalid Entry");
 			alert.setContentText("Entries cannot be null.");
 			alert.show();
+			e.printStackTrace();
 		} catch (NumberFormatException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setHeaderText("Invalid Entry");
@@ -295,7 +303,7 @@ public class PrincipalWindowController {
 		tabPane.getSelectionModel().select(tabSearch);
 		updateEmergenceList();
 	}
-	
+
 	@FXML
 	public void deletePerson(ActionEvent event) {
 		database.deletePerson(modifyName.getText(), modifyLastName.getText(), code.getText());
@@ -303,12 +311,43 @@ public class PrincipalWindowController {
 		tabPane.getSelectionModel().select(tabSearch);
 		updateEmergenceList();
 	}
-	
+
 	@FXML
 	public void generateData(ActionEvent event) {
+		progress.setVisible(true);
+		 Task<Void> task = new Task<Void>()
+		    {
+		        @Override
+		        public Void call()
+		        {
+		            try
+		            {
+		                loadData();
+		                return null;
+		            }
+		            catch (Exception ex)
+		            {
+		               ex.printStackTrace();
+		            }
+		            return null;
+		        }
+		    };
+			progress.progressProperty().bind(task.progressProperty());
+			//SetOnSucceeded methode 
+			task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 
+				@Override
+				public void handle(WorkerStateEvent arg0) {
+					System.out.println("Finish");
+					//progress.setVisible(false);
+				}
+			});
+
+			//Start Thread
+			Thread loadingThread = new Thread(task);
+			loadingThread.start();
 	}
-	
+
 	public void loadData() {
 		try {
 			FileInputStream fileIn = new FileInputStream("data\\database.txt");

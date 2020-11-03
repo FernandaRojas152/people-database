@@ -65,13 +65,14 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="matches" layoutX="193.0" layoutY="14.0" textFill="WHITE" />
+                        <Label fx:id="matches" layoutX="203.0" layoutY="23.0" textFill="WHITE" />
                         <TextField fx:id="auto" layoutX="17.0" layoutY="42.0" prefHeight="25.0" prefWidth="255.0" />
                       <AnchorPane layoutX="98.0" layoutY="94.0" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="175.0">
                            <children>
                               <ScrollPane fx:id="scroll" layoutX="-81.0" layoutY="-26.0" prefHeight="291.0" prefWidth="255.0" />
                            </children>
                         </AnchorPane>
+                        <Label layoutX="309.0" layoutY="23.0" text="Search by" textFill="WHITE" />
                         <ChoiceBox fx:id="searchOptions" layoutX="309.0" layoutY="42.0" prefWidth="150.0" />
                         <ImageView fitHeight="311.0" fitWidth="294.0" layoutX="294.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
                            <image>
