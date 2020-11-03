@@ -46,12 +46,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="20.0" layoutY="30.0" text="Name" />
-                        <Label layoutX="20.0" layoutY="70.0" text="Last name" />
-                        <Label layoutX="20.0" layoutY="110.0" text="Gender" />
-                        <Label layoutX="20.0" layoutY="150.0" text="Birth date" />
-                        <Label layoutX="20.0" layoutY="190.0" text="Height" />
-                        <Label layoutX="20.0" layoutY="230.0" text="Nationality" />
+                        <Label layoutX="20.0" layoutY="30.0" text="Name" textFill="WHITE" />
+                        <Label layoutX="20.0" layoutY="70.0" text="Last name" textFill="WHITE" />
+                        <Label layoutX="20.0" layoutY="110.0" text="Gender" textFill="WHITE" />
+                        <Label layoutX="20.0" layoutY="150.0" text="Birth date" textFill="WHITE" />
+                        <Label layoutX="20.0" layoutY="190.0" text="Height" textFill="WHITE" />
+                        <Label layoutX="20.0" layoutY="230.0" text="Nationality" textFill="WHITE" />
                         <TextField fx:id="name" layoutX="140.0" layoutY="30.0" />
                         <TextField fx:id="lastName" layoutX="140.0" layoutY="70.0" />
                         <DatePicker fx:id="birthdate" layoutX="140.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" />
@@ -93,19 +93,19 @@
                      <children>
                         <Button layoutX="480.0" layoutY="330.0" mnemonicParsing="false" onAction="#modifyPerson" text="Update" />
                         <Button layoutX="540.0" layoutY="330.0" mnemonicParsing="false" onAction="#deletePerson" text="Delete" />
-                        <Label layoutX="240.0" layoutY="30.0" text="Name" />
+                        <Label layoutX="240.0" layoutY="30.0" text="Name" textFill="WHITE" />
                         <TextField fx:id="modifyName" layoutX="360.0" layoutY="30.0" />
-                        <Label layoutX="240.0" layoutY="70.0" text="Last name" />
+                        <Label layoutX="240.0" layoutY="70.0" text="Last name" textFill="WHITE" />
                         <TextField fx:id="modifyLastName" layoutX="360.0" layoutY="70.0" />
-                        <Label layoutX="240.0" layoutY="110.0" text="Code" />
+                        <Label layoutX="240.0" layoutY="110.0" text="Code" textFill="WHITE" />
                         <Label fx:id="code" layoutX="360.0" layoutY="110.0" />
-                        <Label layoutX="240.0" layoutY="150.0" text="Gender" />
+                        <Label layoutX="240.0" layoutY="150.0" text="Gender" textFill="WHITE" />
                         <ChoiceBox fx:id="modifyGenders" layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
-                        <Label layoutX="240.0" layoutY="190.0" text="Birth date" />
+                        <Label layoutX="240.0" layoutY="190.0" text="Birth date" textFill="WHITE" />
                         <DatePicker fx:id="modifyBirthdate" layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" />
-                        <Label layoutX="240.0" layoutY="230.0" text="Height" />
+                        <Label layoutX="242.0" layoutY="234.0" text="Height" textFill="WHITE" />
                         <TextField fx:id="modifyHeight" layoutX="360.0" layoutY="230.0" />
-                        <Label layoutX="240.0" layoutY="270.0" text="Nationality" />
+                        <Label layoutX="240.0" layoutY="270.0" text="Nationality" textFill="WHITE" />
                         <TextField fx:id="modifyNationality" layoutX="360.0" layoutY="270.0" />
                         <ImageView fx:id="modifyphoto" fitHeight="170.0" fitWidth="170.0" layoutX="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
                      </children></AnchorPane>

@@ -1,15 +1,16 @@
 @font-face {
-    font-family: 'Fjalla';
-    src: url('fonts/FjallaOne-Regular.ttf');
+    font-family: 'Cocomat';
+    src: url('fonts/CocomatLight-ZXY3.ttf');
 }
 
 .label {
-    -fx-font-family: 'Fjalla';
-    -fx-font-size: 12;
+    -fx-font-family: 'Cocomat';
+    -fx-font-size: 14;
+	-fx-font-weight: bold;
 }
 
 .button {
-    -fx-font-family: 'Fjalla';
+    -fx-font-family: 'Cocomat';
     -fx-background-color: linear-gradient(to top right, #F26419, #F6AE2D);
 }
 
@@ -24,7 +25,7 @@
 }
 
 .tab .tab-label {
-    -fx-font-family: 'Fjalla';
+    -fx-font-family: 'Cocomat';
     -fx-alignment: CENTER;
     -fx-text-fill: #FFFFFF;
     -fx-font-size: 12px;
