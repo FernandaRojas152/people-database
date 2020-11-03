@@ -42,7 +42,7 @@ public class PrincipalWindowController {
 	public final String NAME = "Name";
 	public final String LAST_NAME = "Last Name";
 	public final String FULL_NAME = "Full name";
-	public final String CODE = "Code";
+	public final String CODE = "Code"; 
 	public final String MALE = "Male";
 	public final String FEMALE = "Female";
 
@@ -245,7 +245,15 @@ public class PrincipalWindowController {
 		modifyNationality.setText(person.getNationality());
 
 		try {
-			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
+			final String urlStr = "https://thispersondoesnotexist.com/image";
+			final URL url = new URL(urlStr);
+			final HttpURLConnection connection = (HttpURLConnection) url
+			        .openConnection();
+			connection.setRequestProperty(
+			    "User-Agent",
+			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
+//			BufferedImage bufferedImage = ImageIO.read(new URL("https://thispersondoesnotexist.com/image"));
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			modifyphoto.setImage(image);
 		} catch (MalformedURLException e) {
@@ -328,7 +336,7 @@ public class PrincipalWindowController {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				System.out.println("Finish");
-				progress.setVisible(false);
+				//progress.setVisible(false);
 			}
 		});
 		Thread loadingThread = new Thread(task);
