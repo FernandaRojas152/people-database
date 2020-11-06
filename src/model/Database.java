@@ -25,8 +25,18 @@ public class Database implements Serializable {
 		codeRBTree = new RedBlackBST<String, Person>();
 		persons = new ArrayList<Person>();
 	}
-
-	public void createPerson(String name, String lastName, String gender, LocalDate birthDate, Double height, 
+	
+	public void createPerson(String code, String name, String lastName, String gender, LocalDate birthDate, double height, 
+			String nationality) throws IllegalArgumentException {
+		code = UUID.randomUUID().toString();
+		Person person = new Person(code, name, lastName, gender, birthDate, height, nationality);
+		nameAVLTree.addNode(name, person);
+		lastNameAVLTree.addNode(lastName, person);
+		fullNameRBTree.insertRB(name+" "+lastName, person);
+		codeRBTree.insertRB(code, person);
+	}
+	
+	public void createPerson(String name, String lastName, String gender, LocalDate birthDate, double height, 
 			String nationality) throws IllegalArgumentException {
 		String code = UUID.randomUUID().toString();
 		Person person = new Person(code, name, lastName, gender, birthDate, height, nationality);
