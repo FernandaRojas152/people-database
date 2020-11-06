@@ -283,7 +283,7 @@ public class PrincipalWindowController {
 			birthdate.setValue(null);
 			height.setText(null);
 			nationality.setText(null);
-			final String urlStr = "https://thispersondoesnotexist.com/image";
+			final String urlStr= "https://thispersondoesnotexist.com/image";
 			final URL url = new URL(urlStr);
 			final HttpURLConnection connection = (HttpURLConnection) url
 					.openConnection();
@@ -292,7 +292,7 @@ public class PrincipalWindowController {
 					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-			modifyphoto.setImage(image);
+			photo.setImage(image);
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setHeaderText("Invalid Entry");
@@ -349,25 +349,20 @@ public class PrincipalWindowController {
 
 	@FXML
 	public void generateData(ActionEvent event) {
-
 		time.setText(null);
 		double timePassed = System.currentTimeMillis();
 
 		Task<Void> task = new Task<Void>() {
 			@Override
 			public Void call() throws ClassNotFoundException, IOException {
-
 				progress.setVisible(true);
-				loadInfo();
 				try {
-					for (int i = 0; i < 100000; i++) {
-						System.out.println(database.toString());
-					}
+					loadInfo();
 				}
 				catch (Exception e) {
 					e.printStackTrace();
 				}
-				//progress.setViewOrder(System.currentTimeMillis()-timePassed);
+				progress.setMaxHeight(System.currentTimeMillis()-timePassed);
 				return null;
 			}
 		};
@@ -377,9 +372,8 @@ public class PrincipalWindowController {
 			@Override
 			public void handle(WorkerStateEvent arg0) {
 				System.out.println("Finish");
-				//progress.setVisible(false);
 				progress.setVisible(false);
-				//time.setText(progress.getViewOrder()/1000+" sec");
+				time.setText(progress.getMaxHeight()/1000+" sec");
 			}
 		});
 		Thread loadingThread = new Thread(task);
