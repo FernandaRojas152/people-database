@@ -379,7 +379,6 @@ public class PrincipalWindowController {
 	public void generateData(ActionEvent event) {
 		time.setText(null);
 		double timePassed = System.currentTimeMillis();
-
 		Task<Void> task = new Task<Void>() {
 			@Override
 			public Void call() throws ClassNotFoundException, IOException {
