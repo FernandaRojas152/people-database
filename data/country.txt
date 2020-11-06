@@ -1,0 +1,40 @@
+United States,331341050,0.32,0.32
+Brazil,212821986,0.20,0.53
+Mexico,129166028,0.12,0.66
+Colombia,50976248,0.04,0.71
+Argentina,45267449,0.04,0.75
+Canada,37799407,0.03,0.79
+Peru,33050211,0.03,0.82
+Venezuela,28421581,0.02,0.85
+Chile,19144605,0.01,0.87
+Guatemala,17971382,0.01,0.89
+Ecuador,17688599,0.01,0.91
+Bolivia,11700207,0.01,0.92
+Haiti,11426356,0.01,0.93
+Cuba,11325391,0.01,0.94
+Dominican Republic,10866667,0.01,0.95
+Honduras,9931333,0.009,0.96
+Paraguay,7147553,0.006,0.97
+Nicaragua,6638075,0.006,0.98
+El Salvador,6491923,0.004,0.99
+Costa Rica,5102158,0.004,0.99
+Panama,4326296,0.003,0.99
+Uruguay,3475842,0.003,0.99
+Jamaica,2963429,0.002,0.99
+Puerto Rico,2846860,0.002,0.99
+Trinidad and Tobago,1400283,0.001,0.99
+Bahamas,393893,0.0003,0.99
+French Guiana,299958,0.0002,0.99
+Barbados,287437,0.0002,0.99
+New Caledonia,285972,0.0002,0.99
+Saint Lucia,183774,0.0001,0.99
+Grenada,112614,0.0001,0.99
+St. Vincent & Grenadines,111002,0.0001,0.99
+U.S. Virgin Islands,104398,0.0001,0.99
+Antigua and Barbuda,98069,0,0.99
+Cayman Islands,65854,0,0.99
+Saint Kitts & Nevis,53264,0,0.99
+Sint Maarten,42960,0,0.99
+Saint Martin,38778,0,0.99
+Anguilla,15026,0,0.99
+Saint Pierre & Miquelon,5789,0,0.99
