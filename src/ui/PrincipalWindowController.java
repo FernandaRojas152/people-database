@@ -12,13 +12,9 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
 import javax.imageio.ImageIO;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -337,18 +333,46 @@ public class PrincipalWindowController {
 	}
 
 	public void loadInfo() throws IOException{
-		File myFile = new File(PATH);
-		FileReader fr= new FileReader(myFile);
-		BufferedReader br= new BufferedReader(fr);
-		String line= br.readLine();
-		while(line!=null) {
-			String[]data=line.split(",");
-			database.createPerson(data[0], data[1], data[2],
-					data[3], LocalDate.parse(data[4]), Double.parseDouble(data[5]), data[6]);
-			line= br.readLine();
+		
+		File file = new File("data\\name.txt");
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String name = br.readLine();
+		
+		while(name!=null) {
+			
+			File file2 = new File("data\\lastname.txt");
+			BufferedReader br2 = new BufferedReader(new FileReader(file2));
+			String lastName = br2.readLine();
+			
+			while(lastName!=null) {
+				database.createPerson(name, lastName, generateNationality());
+				lastName = br2.readLine();
+			}
+			br2.close();
+			name = br.readLine();
 		}
 		br.close();
-		fr.close();
+	}
+	
+	private String generateNationality() throws IOException {
+		
+		Random r = new Random();
+		double randomValue = 99.99*r.nextDouble();
+		String nationality = "";
+		File file = new File("data\\country.txt");
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String[] data = br.readLine().split(", ");
+		boolean stop = false;
+		
+		while(data!=null && !stop) {
+			if(randomValue <= Double.parseDouble(data[3])) {
+				nationality = data[0];
+				stop = true;
+			}
+			data = br.readLine().split(", ");
+		}
+		br.close();
+		return nationality;
 	}
 
 	@FXML
@@ -361,12 +385,7 @@ public class PrincipalWindowController {
 			public Void call() throws ClassNotFoundException, IOException {
 				progress.setVisible(true);
 				try {
-
-					for (int i = 0; i < 100000; i++) {
-						System.out.println(generateBirthDate().toString());
-					}
-					
-
+					System.out.println(generateNationality());
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -386,28 +405,6 @@ public class PrincipalWindowController {
 		});
 		Thread loadingThread = new Thread(task);
 		loadingThread.start();
-	}
-	
-	private LocalDate generateBirthDate() throws Exception {
-		
-		Random r = new Random();
-		double randomValue = 99.99*r.nextDouble();
-		int age = 0;
-		if(randomValue > 0 && randomValue <= 18.62) 
-			age = (int) (14*r.nextDouble()); 
-		else if(randomValue > 18.62 && randomValue <= 31.74) 
-			age = (int) (15+(24-15)*r.nextDouble());	
-		else if(randomValue > 31.74 && randomValue <= 71.03) 
-			age = (int) (25+(54-25)*r.nextDouble());
-		else if(randomValue > 73.03 && randomValue <= 83.87) 
-			age = (int) (55+(64-55)*r.nextDouble());	
-		else if(randomValue > 83.87 && randomValue <= 99.99) 
-			age = (int) (65+(90-65)*r.nextDouble()); 
-		
-		LocalDate localDate = LocalDate.now().minusYears(age);
-		localDate = localDate.minusDays((long) ThreadLocalRandom.current().nextDouble(1, 31));
-		localDate = localDate.minusMonths((long) ThreadLocalRandom.current().nextDouble(1, 12));
-		return localDate;
 	}
 	
 	public void loadData() {
