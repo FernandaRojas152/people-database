@@ -1,8 +1,11 @@
 package ui;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -51,6 +54,7 @@ public class PrincipalWindowController {
 	public final String CODE = "Code"; 
 	public final String MALE = "Male";
 	public final String FEMALE = "Female";
+	public static final String PATH = "data/data.txt";
 
 	@FXML
 	private TabPane tabPane;
@@ -117,10 +121,10 @@ public class PrincipalWindowController {
 
 	@FXML
 	private ImageView modifyphoto;
-	
+
 	@FXML
-    private ProgressBar progress;
-	
+	private ProgressBar progress;
+
 	@FXML
 	private Label time;
 
@@ -137,10 +141,10 @@ public class PrincipalWindowController {
 			final String urlStr = "https://thispersondoesnotexist.com/image";
 			final URL url = new URL(urlStr);
 			final HttpURLConnection connection = (HttpURLConnection) url
-			        .openConnection();
+					.openConnection();
 			connection.setRequestProperty(
-			    "User-Agent",
-			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+					"User-Agent",
+					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			photo.setImage(image);
@@ -162,7 +166,7 @@ public class PrincipalWindowController {
 				auto.setText(null);
 				scroll.setContent(null);
 				matches.setText(null);
-				
+
 				try {
 					if((int)newValue==0) {
 						trie = new Trie();
@@ -258,10 +262,10 @@ public class PrincipalWindowController {
 			final String urlStr = "https://thispersondoesnotexist.com/image";
 			final URL url = new URL(urlStr);
 			final HttpURLConnection connection = (HttpURLConnection) url
-			        .openConnection();
+					.openConnection();
 			connection.setRequestProperty(
-			    "User-Agent",
-			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+					"User-Agent",
+					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			modifyphoto.setImage(image);
@@ -283,13 +287,13 @@ public class PrincipalWindowController {
 			birthdate.setValue(null);
 			height.setText(null);
 			nationality.setText(null);
-			final String urlStr = "https://thispersondoesnotexist.com/image";
+			final String urlStr= "https://thispersondoesnotexist.com/image";
 			final URL url = new URL(urlStr);
 			final HttpURLConnection connection = (HttpURLConnection) url
-			        .openConnection();
+					.openConnection();
 			connection.setRequestProperty(
-			    "User-Agent",
-			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+					"User-Agent",
+					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			photo.setImage(image);
@@ -332,22 +336,37 @@ public class PrincipalWindowController {
 		updateEmergenceList();
 	}
 
+	public void loadInfo() throws IOException{
+		File myFile = new File(PATH);
+		FileReader fr= new FileReader(myFile);
+		BufferedReader br= new BufferedReader(fr);
+		String line= br.readLine();
+		while(line!=null) {
+			String[]data=line.split(",");
+			database.createPerson(data[0], data[1], data[2],
+					data[3], LocalDate.parse(data[4]), Double.parseDouble(data[5]), data[6]);
+			line= br.readLine();
+		}
+		br.close();
+		fr.close();
+	}
+
 	@FXML
 	public void generateData(ActionEvent event) {
-		
 		time.setText(null);
 		double timePassed = System.currentTimeMillis();
-		
+
 		Task<Void> task = new Task<Void>() {
 			@Override
-			public Void call() {
-				
+			public Void call() throws ClassNotFoundException, IOException {
 				progress.setVisible(true);
 				try {
+
 					for (int i = 0; i < 100000; i++) {
 						System.out.println(generateBirthDate().toString());
 					}
 					
+
 				}
 				catch (Exception e) {
 					e.printStackTrace();

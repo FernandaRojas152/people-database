@@ -11,9 +11,9 @@ public class Trie {
 	}
 	
 	public void insert(String word) {
-		if(search(word)== true) {
+		/**if(search(word)== true) {
 			return;
-		}
+		}*/
 		TrieNode aux= root;
 		TrieNode temp;
 		for (char c : word.toCharArray()) {
