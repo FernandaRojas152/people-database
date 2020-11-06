@@ -1,9 +1,11 @@
 package redBlackBST;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOperations<K, V> {
-	
+public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOperations<K, V>, Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private RedBlackNode<K, V> nil;
 	private RedBlackNode<K, V> root;
 
@@ -49,7 +51,7 @@ public class RedBlackBST<K extends Comparable<K>, V> implements RedBlackBSTOpera
 		RedBlackNode<K, V> x = root;
 		while (!isNil(x)){
 			y = x;	
-			if (z.k.compareTo(x.k) < 0)
+			if (z.k.compareTo(x.k) <= 0)
 				x = x.left;
 			else 
 				x = x.right;

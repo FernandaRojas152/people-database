@@ -1,8 +1,11 @@
 package redBlackBST;
 
-public class RedBlackNode<K extends Comparable<K>, V> {
+import java.io.Serializable;
 
-    public static final int BLACK = 0;
+public class RedBlackNode<K extends Comparable<K>, V> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	public static final int BLACK = 0;
     public static final int RED = 1;
     
 	protected K k;

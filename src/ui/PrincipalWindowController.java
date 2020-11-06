@@ -9,8 +9,13 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.imageio.ImageIO;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -287,7 +292,7 @@ public class PrincipalWindowController {
 			    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			BufferedImage bufferedImage = ImageIO.read(connection.getInputStream());
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-			modifyphoto.setImage(image);
+			photo.setImage(image);
 		} catch (NullPointerException e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setHeaderText("Invalid Entry");
@@ -340,13 +345,14 @@ public class PrincipalWindowController {
 				progress.setVisible(true);
 				try {
 					for (int i = 0; i < 100000; i++) {
-						System.out.println(database.toString());
+						System.out.println(generateBirthDate().toString());
 					}
+					
 				}
 				catch (Exception e) {
 					e.printStackTrace();
 				}
-				//progress.setViewOrder(System.currentTimeMillis()-timePassed);
+				progress.setMaxHeight(System.currentTimeMillis()-timePassed);
 				return null;
 			}
 		};
@@ -355,22 +361,41 @@ public class PrincipalWindowController {
 
 			@Override
 			public void handle(WorkerStateEvent arg0) {
-				System.out.println("Finish");
-				//progress.setVisible(false);
 				progress.setVisible(false);
-				//time.setText(progress.getViewOrder()/1000+" sec");
+				time.setText(progress.getMaxHeight()/1000+" sec");
 			}
 		});
 		Thread loadingThread = new Thread(task);
 		loadingThread.start();
 	}
-
+	
+	private LocalDate generateBirthDate() throws Exception {
+		
+		Random r = new Random();
+		double randomValue = 99.99*r.nextDouble();
+		int age = 0;
+		if(randomValue > 0 && randomValue <= 18.62) 
+			age = (int) (14*r.nextDouble()); 
+		else if(randomValue > 18.62 && randomValue <= 31.74) 
+			age = (int) (15+(24-15)*r.nextDouble());	
+		else if(randomValue > 31.74 && randomValue <= 71.03) 
+			age = (int) (25+(54-25)*r.nextDouble());
+		else if(randomValue > 73.03 && randomValue <= 83.87) 
+			age = (int) (55+(64-55)*r.nextDouble());	
+		else if(randomValue > 83.87 && randomValue <= 99.99) 
+			age = (int) (65+(90-65)*r.nextDouble()); 
+		
+		LocalDate localDate = LocalDate.now().minusYears(age);
+		localDate = localDate.minusDays((long) ThreadLocalRandom.current().nextDouble(1, 31));
+		localDate = localDate.minusMonths((long) ThreadLocalRandom.current().nextDouble(1, 12));
+		return localDate;
+	}
+	
 	public void loadData() {
 		try {
 			FileInputStream fileIn = new FileInputStream("data\\database.txt");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			database = (Database) in.readObject();
-			System.out.println(database.getPersonsByName().get(0).getName());
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();

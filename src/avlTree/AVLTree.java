@@ -1,10 +1,15 @@
 package avlTree;
 
+import java.io.Serializable;
+
 import binarySearchTree.BinarySearchTree;
 import binarySearchTree.Node;
 
-public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
+public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private AVLNode<K, V> node;
+	
 	public AVLTree() {
 	}
 	
@@ -17,12 +22,10 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> {
 		
         if (current == null)  
             return node;  
-        if (node.getK().compareTo(current.getK()) < 0)  
+        if (node.getK().compareTo(current.getK()) <= 0)  
             current.setLeft(add((AVLNode<K, V>) current.getLeft(), node));  
-        else if (node.getK().compareTo(current.getK()) > 0)  
+        else 
         	current.setRight(add((AVLNode<K, V>) current.getRight(), node));
-        else   
-            return current;  
   
         current.setHeight(1 + Math.max(height((AVLNode<K, V>) current.getLeft()), height((AVLNode<K, V>) current.getRight())));  
  

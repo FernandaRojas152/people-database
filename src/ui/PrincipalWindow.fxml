@@ -104,7 +104,7 @@
                         <ChoiceBox fx:id="modifyGenders" layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
                         <Label layoutX="240.0" layoutY="190.0" text="Birth date" textFill="WHITE" />
                         <DatePicker fx:id="modifyBirthdate" layoutX="360.0" layoutY="190.0" prefHeight="25.0" prefWidth="150.0" />
-                        <Label layoutX="242.0" layoutY="234.0" text="Height" textFill="WHITE" />
+                        <Label layoutX="240.0" layoutY="230.0" text="Height" textFill="WHITE" />
                         <TextField fx:id="modifyHeight" layoutX="360.0" layoutY="230.0" />
                         <Label layoutX="240.0" layoutY="270.0" text="Nationality" textFill="WHITE" />
                         <TextField fx:id="modifyNationality" layoutX="360.0" layoutY="270.0" />

@@ -1,5 +1,6 @@
 package binarySearchTree;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -10,8 +11,9 @@ import java.util.Collection;
  * @param <V>
  */
 
-public class Node<K extends Comparable<K>, V> {
+public class Node<K extends Comparable<K>, V> implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private K k;
 	private V v;
 	private Node<K, V> left;

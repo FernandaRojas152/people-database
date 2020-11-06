@@ -30,13 +30,20 @@ public class Database implements Serializable {
 			String nationality) throws IllegalArgumentException {
 		String code = UUID.randomUUID().toString();
 		Person person = new Person(code, name, lastName, gender, birthDate, height, nationality);
-		nameAVLTree.addNode(name, person);
+		if(lastNameAVLTree.searchNode(lastName)==null)
+			nameAVLTree.addNode(name, person);
 		lastNameAVLTree.addNode(lastName, person);
 		fullNameRBTree.insertRB(name+" "+lastName, person);
 		codeRBTree.insertRB(code, person);
 	}
 	
 	public void deletePerson(String name, String lastName, String code) {
+		Person personByCode = codeRBTree.search(code).getV();
+		for (Person person : getPersonsByName()) {
+			if(personByCode==person) {
+				
+			}
+		}
 		nameAVLTree.deleteNode(name);
 		lastNameAVLTree.deleteNode(lastName);
 		fullNameRBTree.deleteRB(name+" "+lastName);
@@ -44,9 +51,8 @@ public class Database implements Serializable {
 	}
 	
 	public void updatePerson(String code, String name, String lastName, String gender, LocalDate birthDate, Double height, 
-			String nationality) {
+			String nationality) {	
 		Person person = codeRBTree.search(code).getV();
-		fullNameRBTree.search(person.getName()+" "+person.getLastName()).setK(name+" "+lastName);;
 		person.setName(name);
 		person.setLastName(lastName);
 		person.setGender(gender);
