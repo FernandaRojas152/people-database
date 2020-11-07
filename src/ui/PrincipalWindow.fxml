@@ -92,14 +92,14 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="480.0" layoutY="330.0" mnemonicParsing="false" onAction="#modifyPerson" text="Update" />
-                        <Button layoutX="540.0" layoutY="330.0" mnemonicParsing="false" onAction="#deletePerson" text="Delete" />
+                        <Button layoutX="480.0" layoutY="330.0" mnemonicParsing="false" onAction="#modifyPerson" text="Update" textFill="WHITE" />
+                        <Button layoutX="540.0" layoutY="330.0" mnemonicParsing="false" onAction="#deletePerson" text="Delete" textFill="WHITE" />
                         <Label layoutX="240.0" layoutY="30.0" text="Name" textFill="WHITE" />
                         <TextField fx:id="modifyName" layoutX="360.0" layoutY="30.0" />
                         <Label layoutX="240.0" layoutY="70.0" text="Last name" textFill="WHITE" />
                         <TextField fx:id="modifyLastName" layoutX="360.0" layoutY="70.0" />
                         <Label layoutX="240.0" layoutY="110.0" text="Code" textFill="WHITE" />
-                        <Label fx:id="code" layoutX="360.0" layoutY="110.0" />
+                        <Label fx:id="code" layoutX="360.0" layoutY="110.0" textFill="WHITE" />
                         <Label layoutX="240.0" layoutY="150.0" text="Gender" textFill="WHITE" />
                         <ChoiceBox fx:id="modifyGenders" layoutX="360.0" layoutY="150.0" prefWidth="150.0" />
                         <Label layoutX="240.0" layoutY="190.0" text="Birth date" textFill="WHITE" />
