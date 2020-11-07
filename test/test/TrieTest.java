@@ -6,10 +6,11 @@ import org.junit.jupiter.api.Test;
 import trie.Trie;
 
 class TrieTest {
-	Trie trie;
+	
+	private Trie trie;
 
 	/** STAGES */
-	public void setUpStage1() {
+	void setUpStage1() {
 		trie = new Trie();
 		trie.insert("Edgar Allan Poe");
 		trie.insert("James Barrie");

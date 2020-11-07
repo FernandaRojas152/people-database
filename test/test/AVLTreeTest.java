@@ -5,7 +5,7 @@ import avlTree.AVLTree;
 
 class AVLTreeTest {
 	
-	AVLTree<Integer, Integer> aVLTree;
+	private AVLTree<Integer, Integer> aVLTree;
 	
 	void setUpScene() {
 		aVLTree = new AVLTree<Integer, Integer>();
