@@ -32,7 +32,7 @@ public class Database implements Serializable {
 	public void createPerson(String name, String lastName, String nationality) throws IllegalArgumentException {
 		String code = UUID.randomUUID().toString();
 		Person person = new Person(code, name, lastName, generateGender(), generateBirthDate(),
-				Double.parseDouble(String.format("%.2f", ThreadLocalRandom.current().nextDouble(0.50, 2))), nationality);
+				Double.parseDouble(String.format("%.2f", ThreadLocalRandom.current().nextDouble(0.50, 2.0))), nationality);
 		nameAVLTree.addNode(name, person);
 		lastNameAVLTree.addNode(lastName, person);
 		fullNameRBTree.insertRB(name+" "+lastName, person);
