@@ -54,6 +54,9 @@ public class PrincipalWindowController {
 
 	@FXML
 	private TabPane tabPane;
+	
+	@FXML
+	private TextField amountData;
 
 	@FXML
 	private TextField name;
@@ -337,16 +340,20 @@ public class PrincipalWindowController {
 		File file = new File("data\\name.txt");
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String name = br.readLine();
+		int amount = Integer.parseInt(amountData.getText());
+		int total = 0;
 		
-		while(name!=null) {
+		while(name!=null && total <= amount) {
 			
 			File file2 = new File("data\\lastname.txt");
 			BufferedReader br2 = new BufferedReader(new FileReader(file2));
 			String lastName = br2.readLine();
 			
 			while(lastName!=null) {
+				System.out.println(name+" "+lastName);
 				database.createPerson(name, lastName, generateNationality());
 				lastName = br2.readLine();
+				total++;
 			}
 			br2.close();
 			name = br.readLine();
@@ -357,19 +364,21 @@ public class PrincipalWindowController {
 	private String generateNationality() throws IOException {
 		
 		Random r = new Random();
-		double randomValue = 99.99*r.nextDouble();
+		double randomValue = 99*r.nextDouble();
+		randomValue = randomValue/100;
 		String nationality = "";
 		File file = new File("data\\country.txt");
 		BufferedReader br = new BufferedReader(new FileReader(file));
-		String[] data = br.readLine().split(", ");
+		String data = br.readLine();
 		boolean stop = false;
 		
 		while(data!=null && !stop) {
-			if(randomValue <= Double.parseDouble(data[3])) {
-				nationality = data[0];
+			String[] dataArray = data.split(",");
+			if(randomValue <= Double.parseDouble(dataArray[3])) {
+				nationality = dataArray[0];
 				stop = true;
 			}
-			data = br.readLine().split(", ");
+			data = br.readLine();
 		}
 		br.close();
 		return nationality;
@@ -384,7 +393,7 @@ public class PrincipalWindowController {
 			public Void call() throws ClassNotFoundException, IOException {
 				progress.setVisible(true);
 				try {
-					System.out.println(generateNationality());
+					loadInfo();
 				}
 				catch (Exception e) {
 					e.printStackTrace();

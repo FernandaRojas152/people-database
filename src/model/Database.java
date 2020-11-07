@@ -86,14 +86,9 @@ public class Database implements Serializable {
 	
 	public void deletePerson(String name, String lastName, String code) {
 		Person personByCode = codeRBTree.search(code).getV();
-		for (Person person : getPersonsByName()) {
-			if(personByCode==person) {
-				
-			}
-		}
-		nameAVLTree.deleteNode(name);
-		lastNameAVLTree.deleteNode(lastName);
-		fullNameRBTree.deleteRB(name+" "+lastName);
+		nameAVLTree.deleteNode(personByCode.getName());
+		lastNameAVLTree.deleteNode(personByCode.getLastName());
+		fullNameRBTree.deleteRB(personByCode.getName()+" "+personByCode.getLastName());
 		codeRBTree.deleteRB(code);
 	}
 	
