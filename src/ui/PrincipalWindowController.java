@@ -365,7 +365,7 @@ public class PrincipalWindowController {
 		int amount = Integer.parseInt(amountData.getText());
 		int total = 0;
 		
-		while(name!=null) {
+		while(name!=null && total <= amount) {
 			
 			File file2 = new File("data\\lastname.txt");
 			BufferedReader br2 = new BufferedReader(new FileReader(file2));
@@ -412,7 +412,7 @@ public class PrincipalWindowController {
 		double timePassed = System.currentTimeMillis();
 		Task<Void> task = new Task<Void>() {
 			@Override
-			public Void call() throws ClassNotFoundException, IOException {
+			public Void call() throws IOException {
 				progress.setVisible(true);
 				try {
 					loadInfo();
