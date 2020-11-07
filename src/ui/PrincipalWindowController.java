@@ -50,7 +50,6 @@ public class PrincipalWindowController {
 	public final String CODE = "Code"; 
 	public final String MALE = "Male";
 	public final String FEMALE = "Female";
-	public static final String PATH = "data/data.txt";
 
 	@FXML
 	private TabPane tabPane;
