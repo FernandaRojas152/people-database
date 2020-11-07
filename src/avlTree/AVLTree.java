@@ -26,8 +26,10 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> i
             current.setLeft(add((AVLNode<K, V>) current.getLeft(), node));  
         else if (node.getK().compareTo(current.getK()) > 0)  
         	current.setRight(add((AVLNode<K, V>) current.getRight(), node));
-        else
+        else {
+        	current.addNode(node);
         	return current;
+        }
   
         current.setHeight(1 + Math.max(height((AVLNode<K, V>) current.getLeft()), height((AVLNode<K, V>) current.getRight())));  
  
@@ -36,14 +38,14 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> i
         if (balance > 1 && node.getK().compareTo(current.getLeft().getK()) < 0)  
             return (AVLNode<K, V>) rightRotate(current);  
   
-        if (balance < -1 && node.getK().compareTo(current.getLeft().getK()) > 0)  
+        if (balance < -1 && node.getK().compareTo(current.getRight().getK()) > 0)  
             return (AVLNode<K, V>) leftRotate(current);  
     
         if (balance > 1 && node.getK().compareTo(current.getLeft().getK()) > 0)  {
             current.setLeft(leftRotate((AVLNode<K, V>) current.getLeft()));  
             return (AVLNode<K, V>) rightRotate(current);  
         }    
-        if (balance < -1 && node.getK().compareTo(current.getLeft().getK()) < 0) {  
+        if (balance < -1 && node.getK().compareTo(current.getRight().getK()) < 0) {  
             current.setRight(rightRotate((AVLNode<K, V>) current.getRight()));  
             return (AVLNode<K, V>) leftRotate(current);  
         }  

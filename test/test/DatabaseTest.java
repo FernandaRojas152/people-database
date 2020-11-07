@@ -18,7 +18,8 @@ class DatabaseTest {
 	@Test
 	void test() {
 		setUpStage1();
-		assertEquals("Fernanda Rojas",database.searchByFullName("Fernanda Rojas"), "should be found");
+		assertEquals("Fernanda Rojas",database.searchByFullName("Fernanda Rojas").getName()+" "+
+		database.searchByFullName("Fernanda Rojas").getLastName(), "should be found");
 	}
 
 }

@@ -207,8 +207,31 @@ public class PrincipalWindowController {
 					gridPane.getChildren().clear();
 					scroll.setContent(gridPane);
 					matches.setText("("+data.size()+") results");
+				
 					if(data.size()<=100) {
 						for (int i = 0; i < data.size(); i++) {
+							Label label = new Label(data.get(i));
+							gridPane.add(label, 1, i);
+							if(data.size()<=20) {
+								Button edit = new Button("edit");
+								gridPane.add(edit, 2, i);
+								edit.setOnAction(new EventHandler<ActionEvent>() {
+									@Override
+									public void handle(ActionEvent arg0) {
+										auto.setText(null);
+										gridPane.getChildren().clear();
+										scroll.setContent(gridPane);
+										matches.setText(null);
+										tabPane.getSelectionModel().select(tabModify);
+										tabModify.setDisable(false);
+										searchPerson(label.getText());
+									}
+								});
+							}
+							scroll.setContent(gridPane);
+						}
+					}else {
+						for (int i = 0; i < 99; i++) {
 							Label label = new Label(data.get(i));
 							gridPane.add(label, 1, i);
 							if(data.size()<=20) {
@@ -343,14 +366,14 @@ public class PrincipalWindowController {
 		int amount = Integer.parseInt(amountData.getText());
 		int total = 0;
 		
-		while(name!=null && total <= amount) {
+		while(name!=null) {
 			
 			File file2 = new File("data\\lastname.txt");
 			BufferedReader br2 = new BufferedReader(new FileReader(file2));
 			String lastName = br2.readLine();
 			
-			while(lastName!=null) {
-				System.out.println(name+" "+lastName);
+			while(lastName!=null && total <= amount) {
+				if(total%1000==0) System.out.println(total+" "+name+" "+lastName);
 				database.createPerson(name, lastName, generateNationality());
 				lastName = br2.readLine();
 				total++;
