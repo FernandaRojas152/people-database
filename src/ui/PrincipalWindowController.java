@@ -258,7 +258,7 @@ public class PrincipalWindowController {
 		});
 	}
 
-	private void searchPerson(String data) {
+	public void searchPerson(String data) {
 
 		Person person;
 
