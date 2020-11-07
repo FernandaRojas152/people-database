@@ -77,8 +77,7 @@ public class Database implements Serializable {
 			String nationality) throws IllegalArgumentException {
 		String code = UUID.randomUUID().toString();
 		Person person = new Person(code, name, lastName, gender, birthDate, height, nationality);
-		if(lastNameAVLTree.searchNode(lastName)==null)
-			nameAVLTree.addNode(name, person);
+		nameAVLTree.addNode(name, person);
 		lastNameAVLTree.addNode(lastName, person);
 		fullNameRBTree.insertRB(name+" "+lastName, person);
 		codeRBTree.insertRB(code, person);

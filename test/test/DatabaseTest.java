@@ -9,17 +9,17 @@ class DatabaseTest {
 	private Database database;
 	
 	/** STAGES */
-	public void setUpStage1() {
+	void setUpStage1() {
 		database= new Database();
 		database.createPerson("Fernanda", "Rojas", "Colombian");
 	}
 	
-	public void setUpStage2() {
+	void setUpStage2() {
 		database= new Database();
 		database.createPerson("Amanda", "Rojas", "Female", LocalDate.now(), 1.62, "Colombian");
 	}
 	
-	public void setUpStage3() {
+	void setUpStage3() {
 		database= new Database();
 	}
 	

@@ -7,7 +7,7 @@ import redBlackBST.RedBlackBST;
 
 class RedBlackBSTTest {
 	
-	RedBlackBST<Integer, String> redBlackBST;
+	private RedBlackBST<Integer, String> redBlackBST;
 
 	void setUpScene() {
 		redBlackBST = new RedBlackBST<Integer, String>();

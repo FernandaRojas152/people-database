@@ -26,10 +26,8 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K,V> i
             current.setLeft(add((AVLNode<K, V>) current.getLeft(), node));  
         else if (node.getK().compareTo(current.getK()) > 0)  
         	current.setRight(add((AVLNode<K, V>) current.getRight(), node));
-        else {
-        	current.addNode(node);
+        else 
         	return current;
-        }
   
         current.setHeight(1 + Math.max(height((AVLNode<K, V>) current.getLeft()), height((AVLNode<K, V>) current.getRight())));  
  

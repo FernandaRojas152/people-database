@@ -372,7 +372,6 @@ public class PrincipalWindowController {
 			String lastName = br2.readLine();
 			
 			while(lastName!=null && total <= amount) {
-				if(total%1000==0) System.out.println(total+" "+name+" "+lastName);
 				database.createPerson(name, lastName, generateNationality());
 				lastName = br2.readLine();
 				total++;
@@ -381,6 +380,7 @@ public class PrincipalWindowController {
 			name = br.readLine();
 		}
 		br.close();
+		amountData.setText(null);
 	}
 	
 	private String generateNationality() throws IOException {
