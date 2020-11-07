@@ -15,8 +15,8 @@ people-database is made to help with CRUD functions with a big data generate, he
 ## Analysis and Design
 You can find the analysis documents here: <br> Documentation: [***link***](docs/DOCUMENTACION.pdf) <br>
 Engineer design: [***link***](docs/METODODELAINGENIERIA.pdf)
-<br> <br> <br>
-You can find the design documents here: [***link***](docs) <br>
+<br>
+You can find the design documents here: [***link***](docs) <br> <br>
 **You can see some pictures of what the program looks like:** <br>
 ![Captura de pantalla (13)](https://user-images.githubusercontent.com/45322807/98433482-66b0a280-2095-11eb-8202-2678d5a09140.png) <br>
 ![Captura de pantalla (14)](https://user-images.githubusercontent.com/45322807/98433518-bd1de100-2095-11eb-8dff-37866d869b5d.png) <br>
