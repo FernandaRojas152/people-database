@@ -69,7 +69,7 @@ class RedBlackBSTTest {
 	}
 
 	@Test
-	void testSearc2() {
+	void testSearch2() {
 		setUpScene();
 		assertNull(redBlackBST.search(1));
 	}
